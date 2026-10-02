@@ -39,7 +39,7 @@ h1{font-size:clamp(30px,5vw,54px);line-height:1.05;margin:18px 0 12px;letter-spa
 h1 span{background:linear-gradient(90deg,#b7aaff,var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
 .lead{color:var(--muted);font-size:clamp(15px,2vw,18px);max-width:70ch}
 .grid{display:grid;gap:18px}
-.apps{grid-template-columns:repeat(auto-fit,minmax(300px,1fr));margin:28px 0 10px}
+.apps{grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));margin:28px 0 10px}
 .card{
   background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
   border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
@@ -65,17 +65,17 @@ h1 span{background:linear-gradient(90deg,#b7aaff,var(--accent2));-webkit-backgro
 .section{padding:26px 0}
 .section h2{font-size:26px;margin:0 0 6px}
 .section p.hint{color:var(--muted);margin:0 0 18px}
-.features{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.features{grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr))}
 .feat{background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:16px;padding:16px}
 .feat b{display:block;margin-bottom:6px}
 .feat span{color:var(--muted);font-size:14px}
 .tile{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-weight:800;color:#0b1020;
   background:linear-gradient(135deg,var(--amber),var(--accent2));margin-bottom:10px}
-.gallery{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.gallery{grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr))}
 .shot{border-radius:16px;overflow:hidden;border:1px solid var(--line);background:#0e1530}
 .shot img{display:block;width:100%;height:auto}
 .shot figcaption{font-size:13px;color:var(--muted);padding:10px 12px}
-.steps{grid-template-columns:repeat(auto-fit,minmax(220px,1fr));counter-reset:step}
+.steps{grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));counter-reset:step}
 .step{background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:16px;padding:16px;position:relative}
 .step::before{counter-increment:step;content:counter(step);position:absolute;top:-14px;left:14px;
   width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-weight:800;color:#0b1020;
@@ -94,7 +94,8 @@ footer a{color:#cfd6ff}
 .breadcrumb{font-size:14px;color:var(--muted);margin:22px 0 0}
 .breadcrumb a{color:#cfd6ff;text-decoration:none}
 .notice{border:1px solid rgba(255,196,107,.4);background:rgba(255,196,107,.08);border-radius:14px;padding:12px 14px;color:#ffe3b3;font-size:14px}
-@media (max-width:640px){ .card-top{flex-direction:row} .legal{padding:18px} }
+.notice a{overflow-wrap:anywhere}
+
 
 /* Магазины */
 .store-row{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 4px}
@@ -126,3 +127,75 @@ footer a{color:#cfd6ff}
   font-size:13px;color:var(--muted);background:rgba(0,0,0,.5);border:1px solid var(--line);
   padding:4px 12px;border-radius:999px}
 @media (max-width:640px){ .lb-prev{left:6px}.lb-next{right:6px} .lb-btn{width:42px;height:42px} }
+
+/* ===== Мобильная вёрстка ===== */
+/* Ничего не выдавливает по горизонтали */
+html,body{overflow-x:clip}
+body{overflow-wrap:break-word}
+.logo,.logo>span{min-width:0}
+.logo>span{overflow-wrap:anywhere}
+
+/* Шапка: логотип сверху, навигация строкой ниже */
+@media (max-width:640px){
+  .nav{flex-wrap:wrap;gap:8px 12px;padding:10px 0 8px}
+  .logo{flex:1 1 100%;gap:10px;font-size:15px;min-height:44px}
+  .logo-mark{width:32px;height:32px;border-radius:10px;font-size:13px}
+  .logo small{font-size:11px}
+  .nav-links{margin-left:0;flex:1 1 100%;gap:6px;flex-wrap:nowrap}
+  .nav-links a{flex:1 1 0;min-height:44px;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px 8px;font-size:13px;white-space:nowrap;border-radius:10px}
+}
+@media (max-width:400px){ .logo small{display:none} }
+
+/* Отступы и типографика */
+@media (max-width:640px){
+  .wrap{padding:0 16px}
+  .hero{padding:30px 0 20px}
+  h1{font-size:clamp(26px,7vw,32px)}
+  .lead{font-size:15px}
+  .section{padding:20px 0}
+  .section h2{font-size:22px}
+  .breadcrumb{margin:16px 0 0;font-size:13px}
+}
+
+/* Карточки */
+@media (max-width:640px){
+  .card-top{padding:16px;gap:12px}
+  .app-icon{width:56px;height:56px;border-radius:16px}
+  .card h2{font-size:19px}
+  .badges{padding:0 16px;gap:6px}
+  .badge{font-size:12px;padding:4px 9px}
+  .card p.desc{padding:0 16px;font-size:14.5px}
+}
+
+/* Кнопки во всю ширину, тап-цель ≥44px */
+@media (max-width:640px){
+  .btn{min-height:48px;justify-content:center;padding:12px 16px;font-size:15px}
+  .card-actions,.store-row{padding:6px 16px 16px;gap:10px}
+  .card-actions .btn,.store-row .btn{flex:1 1 100%}
+}
+
+/* Скриншоты: горизонтальная карусель со снапом */
+@media (max-width:640px){
+  .gallery{display:flex;grid-template-columns:none;gap:12px;overflow-x:auto;overscroll-behavior-x:contain;
+    scroll-snap-type:x mandatory;scrollbar-width:none;padding:2px 16px 6px;margin:0 -16px}
+  .gallery::-webkit-scrollbar{display:none}
+  .gallery .shot{flex:0 0 76vw;max-width:300px;scroll-snap-align:center}
+  .gallery .shot:hover{transform:none}
+  .shot-btn:hover img{transform:none}
+}
+
+/* Правовые документы */
+@media (max-width:640px){
+  .legal{padding:16px;border-radius:16px}
+  .legal h1{font-size:24px}
+  .legal pre,.doc{padding:14px;font-size:16px;line-height:1.65}
+  .meta{font-size:13px}
+}
+
+/* Блоки и подвал */
+@media (max-width:640px){
+  .feat,.step{padding:14px}
+  .step::before{top:-12px;left:12px;width:24px;height:24px;font-size:13px}
+  .notice{font-size:13.5px;padding:12px}
+  footer{padding:22px 0 32px;font-size:13px;line-height:1.9}
+}

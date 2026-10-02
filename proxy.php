@@ -31,8 +31,16 @@ const CONNECT_TIMEOUT = 8;
 // Числа держатся в паре с потолком RecognitionService.overallTimeout:
 // сумма ENGINE_TIMEOUT (13+43+13 = 69) + запас 11 с = 80. Поднять одно молча
 // нельзя — приложение срежет ответ раньше, чем прокси его отдаст.
-// Движков с двумя и более маршрутами здесь быть не должно: route_timeout
-// режет их на доли, и длинные генерации снова начнут умирать (см. ai-config.php).
+// Делёж route_timeout на боевые движки больше не действует: build_routes()
+// везёт 'budget' => engine_timeout($engine) в каждом маршруте, и именно
+// его CURLOPT_TIMEOUT и берёт. Поэтому цепочка моделей внутри одного
+// движка (models[] в ai-config.php) даёт полный бюджет каждой попытке, и
+// добавлять модели можно без ущерба для первой - как и сделано в 2026-10.
+//
+// Что реально стоит помнить: бюджет на движок, не на запрос. Павший хост
+// съедает его один раз и уходит в паузу, а отказ уровня модели приходит
+// как 400 и паузу не ставит - такие попытки дешёвые. Длинная цепочка
+// опасна только если залипает на каждом маршруте по полному бюджету.
 const ENGINE_TIMEOUT = array('local' => 13, 'opencode' => 43, 'openrouter' => 13);
 const MAX_BODY_BYTES = 8388608;
 // Лимит поднят решением владельца с 6 до 30: за одним публичным IP мобильного
@@ -725,6 +733,26 @@ function rate_state_suffix() {
     return substr(hash_hmac('sha256', 'garant-ai-rate-v1', $seed), 0, 16);
 }
 
+/**
+ * Есть ли в теле апстрима результат, а не завёрнутая ошибка.
+ *
+ * Шлюз отдаёт провайдерскую ошибку кодом 200 с телом вида
+ * {"error":{"code":502,"metadata":{"error_type":"provider_unavailable"}}} -
+ * снаружи это выглядит как успех, но choices в теле нет. Успешное
+ * завершение чата всегда несёт choices[0].message.content, поэтому его
+ * отсутствие и есть признак отказа, как бы тело ни называлось.
+ */
+function upstream_carries_content($body) {
+    $decoded = json_decode($body, true);
+    if (!is_array($decoded)) {
+        return false;
+    }
+    $content = isset($decoded['choices'][0]['message']['content'])
+        ? $decoded['choices'][0]['message']['content']
+        : null;
+    return is_string($content) || is_array($content);
+}
+
 $path = parse_url(isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '', PHP_URL_PATH);
 if (!is_string($path)) {
     $path = '';
@@ -973,11 +1001,32 @@ $headers = array(
 
     // Успех - и дальше не идём. 200 означает, что цепочка моделей этого
     // провайдера уже отдала лучшее, что могла. Паузу снимаем: провайдер жив.
-    if ($body !== false && $status === 200) {
+    if ($body !== false && $status === 200 && upstream_carries_content($body)) {
         $servedLabel = $route['label'];
         $servedEngine = isset($route['engine']) ? (string)$route['engine'] : '';
         provider_mark_success($route['host']);
         break;
+    }
+    // Тот же 200, но тело без choices: шлюз завернул провайдерскую ошибку в
+    // успешный код ответа - так делает OpenRouter, когда у бесплатной модели
+    // не нашлось бэкенда. Это отказ маршрута, а не успех, и объявлять его
+    // успехом нельзя: выйдя из цикла, мы отдали бы клиенту 502
+    // upstream_malformed, не спросив следующую модель цепочки.
+    //
+    // Хост на паузу здесь не ставим намеренно: провайдер жив, не нашёлся
+    // только один модельный бэкенд, и следующая модель того же хоста обязана
+    // быть опрошена.
+    if ($body !== false && $status === 200) {
+        error_log(sprintf(
+            'ai_proxy upstream_error_envelope engine=%s model=%s host=%s',
+            isset($route['engine']) ? (string)$route['engine'] : '',
+            $route['model'],
+            $route['host']
+        ));
+        $lastStatus = 200;
+        $body = false;
+        $status = 0;
+        continue;
     }
     $lastStatus = $status;
     // 401/403 - это не «модель недоступна», а неверный ключ: остальные
