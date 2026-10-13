@@ -6,7 +6,7 @@
 <title>Видеоняня — Политика конфиденциальности · AppCreatorsTechnoLab</title>
 <meta name="description" content="Политика конфиденциальности Nestling Camera (Видеоняня) от AppCreatorsTechnoLab. RU + EN.">
 <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/css/style.css?v=542dd2c2">
 </head>
 <body>
 <header class="site"><div class="wrap nav">
@@ -23,6 +23,8 @@
 1. Что делает приложение. Приложение превращает Android-телефон («станция») в локальную камеру: видео и звук передаются по вашей домашней Wi-Fi сети напрямую в браузер родителя. Облачных серверов у нас нет — видео не уходит в интернет и не хранится у нас.
 2. Какие данные обрабатываются.
    • Видео и аудио с камеры/микрофона станции — передаются только подключённому зрителю (до 2 зрителей) по зашифрованному соединению (HTTPS/WSS) внутри вашей сети. Мы эти данные не получаем и не храним.
+   • Детектор движения — работает на станции, локально. Картинка для анализа никуда не отправляется и нигде не сохраняется: ни снимков, ни файлов, ни истории кадров на диске. В браузер родителя уходит только факт «движение есть / успокоилось», без изображения.
+   • Подтверждение родителя — тап по картинке отправляет на станцию только сигнал «вижу, всё в порядке». Ни видео, ни звук при этом не передаются.
    • Токен сопряжения и отпечаток сертификата — хранятся только на станции и нужны для подключения по QR-коду.
    • Технические данные устройства (уровень заряда, задержка, журнал ошибок) — показываются родителю в браузере и хранятся только на устройствах.
 3. Реклама. На экране станции показывается реклама Яндекс Рекламной сети (РСЯ). РСЯ может обрабатывать рекламные идентификаторы устройства по своей политике конфиденциальности. Отключение рекламы не предусмотрено текущей версией.
@@ -36,6 +38,8 @@
 1. What the app does. The app turns an Android phone ("station") into a local camera: video and audio are streamed over your home Wi-Fi directly to the parent's browser. We have no cloud servers — video never leaves your network and is never stored by us.
 2. Data processed.
    • Camera/microphone video and audio — sent only to connected viewers (up to 2) over an encrypted connection (HTTPS/WSS) inside your network. We do not receive or store it.
+   • Motion detector — runs locally on the station. The picture analysed for motion is never sent anywhere and never stored: no snapshots, no files, no frame history on disk. The parent's browser receives only the fact «motion / calmed», without any image.
+   • Parent acknowledgement — tapping the picture sends the station only an «I see it, all fine» signal. No video or audio is transmitted with it.
    • Pairing token and certificate fingerprint — stored only on the station, needed for QR-code pairing.
    • Technical data (battery level, latency, error log) — shown to the parent in the browser, stored only on the devices.
 3. Ads. The station screen shows Yandex Advertising Network ads. Yandex may process device advertising identifiers under its own privacy policy.

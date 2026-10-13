@@ -41,10 +41,18 @@ h1 span{background:linear-gradient(90deg,#b7aaff,var(--accent2));-webkit-backgro
 .grid{display:grid;gap:18px}
 .apps{grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));margin:28px 0 10px}
 .card{
+  position:relative;
   background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
   border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
   display:flex;flex-direction:column;box-shadow:var(--shadow);
 }
+/* Вся карточка кликабельна: прозрачная ссылка-оверлей поверх карточки,
+   кнопки внутри actions остаются выше неё. */
+.card-hit{position:absolute;inset:0;z-index:1;border-radius:var(--radius);overflow:hidden;font-size:0}
+.card-hit:focus-visible{outline:2px solid var(--accent2);outline-offset:-2px}
+.card-actions .btn{position:relative;z-index:2}
+.card:has(.card-hit:hover){border-color:rgba(124,108,255,.55);transform:translateY(-2px)}
+.card{transition:border-color .2s,transform .2s}
 .card-top{padding:22px;display:flex;gap:16px;align-items:center}
 .app-icon{width:72px;height:72px;border-radius:20px;object-fit:cover;background:#0e1530;border:1px solid var(--line);flex:none}
 .app-icon.fallback{display:grid;place-items:center;font-size:30px;font-weight:800;background:linear-gradient(135deg,#2a2f6b,#0e4a5a)}

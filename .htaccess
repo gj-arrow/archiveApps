@@ -58,3 +58,12 @@
     </FilesMatch>
   </IfModule>
 </IfModule>
+
+# MIME-тип для .apk. Обёрнут в <IfModule mod_mime.c> по той же причине, что и
+# блоки выше: AddType живёт только в mod_mime, а без него это неизвестная
+# директива и Apache/LiteSpeed отвечает 500 на весь сайт. Пользы от гварда
+# ровно столько же — если модуля нет, браузер получит application/octet-stream
+# и всё равно скачает файл: у ссылки на APK стоит атрибут download.
+<IfModule mod_mime.c>
+  AddType application/vnd.android.package-archive .apk
+</IfModule>
