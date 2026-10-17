@@ -54,6 +54,12 @@ h1 span{background:linear-gradient(90deg,#b7aaff,var(--accent2));-webkit-backgro
 .card:has(.card-hit:hover){border-color:rgba(124,108,255,.55);transform:translateY(-2px)}
 .card{transition:border-color .2s,transform .2s}
 .card-top{padding:22px;display:flex;gap:16px;align-items:center}
+
+/* Hero-карточка страницы приложения: иконка+название в ряду, лид ниже
+   во всю ширину карточки — без узкой колонки слева и пустоты справа. */
+.hero-card .card-top{padding-bottom:10px}
+.hero-card .hero-lead{padding:0 22px;margin:2px 0 0;max-width:none;text-wrap:pretty;text-align:justify}
+@media (max-width:640px){.hero-card .hero-lead{text-align:left}}
 .app-icon{width:72px;height:72px;border-radius:20px;object-fit:cover;background:#0e1530;border:1px solid var(--line);flex:none}
 .app-icon.fallback{display:grid;place-items:center;font-size:30px;font-weight:800;background:linear-gradient(135deg,#2a2f6b,#0e4a5a)}
 .card h2{margin:0;font-size:22px}
@@ -173,6 +179,7 @@ body{overflow-wrap:break-word}
   .badges{padding:0 16px;gap:6px}
   .badge{font-size:12px;padding:4px 9px}
   .card p.desc{padding:0 16px;font-size:14.5px}
+  .hero-card .hero-lead{padding:0 16px}
 }
 
 /* Кнопки во всю ширину, тап-цель ≥44px */
@@ -206,4 +213,38 @@ body{overflow-wrap:break-word}
   .step::before{top:-12px;left:12px;width:24px;height:24px;font-size:13px}
   .notice{font-size:13.5px;padding:12px}
   footer{padding:22px 0 32px;font-size:13px;line-height:1.9}
+}
+
+/* ===== Язык RU/EN и страница поддержки ===== */
+/* Видимость по языку решает CSS, а не JS: без скрипта виден русский. */
+html[lang="ru"] [data-lang="en"],
+html[lang="en"] [data-lang="ru"]{display:none !important}
+
+.lang-switch{margin-left:10px;display:flex;gap:4px;align-items:center}
+.lang-switch button{font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.3px;color:var(--muted);
+  background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:10px;padding:7px 10px;cursor:pointer}
+.lang-switch button:hover{color:var(--text);background:rgba(255,255,255,.12)}
+.lang-switch button.active{color:#0b1020;background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent}
+
+.support-form{display:grid;gap:14px;max-width:640px}
+.support-form label{display:grid;gap:6px;font-size:14px;color:var(--muted)}
+.support-form input,.support-form select,.support-form textarea{
+  font:inherit;color:var(--text);background:rgba(0,0,0,.25);border:1px solid var(--line);
+  border-radius:12px;padding:11px 13px;width:100%}
+.support-form textarea{min-height:170px;resize:vertical}
+.support-form input:focus,.support-form select:focus,.support-form textarea:focus{
+  outline:2px solid rgba(124,108,255,.6);outline-offset:1px}
+.support-form select option{background:#151f42;color:var(--text)}
+.support-form .btn{justify-self:start;cursor:pointer;font-family:inherit}
+.form-status{font-size:14px;border-radius:12px;padding:10px 14px;display:none}
+.form-status.ok{display:block;border:1px solid rgba(74,222,128,.4);background:rgba(74,222,128,.1);color:#c9f7d8}
+.form-status.err{display:block;border:1px solid rgba(255,196,107,.4);background:rgba(255,196,107,.08);color:#ffe3b3}
+.form-status.busy{display:block;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--muted)}
+.hp-field{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.support-note{color:var(--muted);font-size:13.5px}
+
+@media (max-width:640px){
+  .nav{position:relative}
+  .lang-switch{position:absolute;top:12px;right:16px;margin:0}
+  .support-form .btn{width:100%;justify-content:center}
 }

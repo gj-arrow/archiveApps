@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Поддержка — AppCreatorsTechnoLab</title>
+<meta name="description" content="Страница поддержки приложений AppCreatorsTechnoLab: напишите вопрос по Видеоняне, Архиву гарантий, Дневнику здоровья или общий вопрос. Почта поддержки: appcreators.technolab@ya.ru.">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/style.css?v=20261018-2">
+</head>
+<body data-title-ru="Поддержка — AppCreatorsTechnoLab" data-title-en="Support — AppCreatorsTechnoLab">
+<header class="site">
+  <div class="wrap nav">
+    <a class="logo" href="index.html"><span class="logo-mark">AT</span><span>AppCreatorsTechnoLab<small><span data-lang="ru">сборник приложений</span><span data-lang="en">app collection</span></small></span></a>
+    <nav class="nav-links">
+      <a href="index.html"><span data-lang="ru">Приложения</span><span data-lang="en">Apps</span></a>
+      <a href="legal.html"><span data-lang="ru">Правовые документы</span><span data-lang="en">Legal</span></a>
+      <a class="active" href="support.html"><span data-lang="ru">Поддержка</span><span data-lang="en">Support</span></a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="breadcrumb"><a href="index.html"><span data-lang="ru">Главная</span><span data-lang="en">Home</span></a> / <span data-lang="ru">Поддержка</span><span data-lang="en">Support</span></p>
+  <section class="hero">
+    <span class="eyebrow"><i></i><span data-lang="ru">Ответим на почту</span><span data-lang="en">We reply by email</span></span>
+    <h1><span data-lang="ru">Поддержка</span><span data-lang="en">Support</span></h1>
+    <p class="lead"><span data-lang="ru">Напишите нам, если что-то не работает, есть вопрос по приложению или предложение. Отвечаем на почту, указанную вами для ответа, обычно в течение нескольких дней.</span><span data-lang="en">Write to us if something is broken, or you have a question or suggestion about an app. We reply to the email you provide, usually within a few days.</span></p>
+  </section>
+
+  <section class="section">
+    <h2><span data-lang="ru">Как получить быструю помощь</span><span data-lang="en">How to get help faster</span></h2>
+    <div class="grid features">
+      <div class="feat"><b><span data-lang="ru">Приложение и версия</span><span data-lang="en">App and version</span></b><span><span data-lang="ru">Укажите приложение и его версию — она видна в настройках приложения.</span><span data-lang="en">Tell us which app and its version — it is shown in the app's settings.</span></span></div>
+      <div class="feat"><b><span data-lang="ru">Устройство</span><span data-lang="en">Device</span></b><span><span data-lang="ru">Модель устройства и версия операционной системы.</span><span data-lang="en">Device model and operating system version.</span></span></div>
+      <div class="feat"><b><span data-lang="ru">Шаги и результат</span><span data-lang="en">Steps and result</span></b><span><span data-lang="ru">Что вы делали шаг за шагом и что произошло вместо ожидаемого.</span><span data-lang="en">What you did step by step and what happened instead.</span></span></div>
+      <div class="feat"><b><span data-lang="ru">Безопасность</span><span data-lang="en">Safety</span></b><span><span data-lang="ru">Не отправляйте пароли, коды и персональные данные третьих лиц. В форму файлы не прикрепляются.</span><span data-lang="en">Never send passwords, codes or other people's personal data. The form does not accept attachments.</span></span></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2><span data-lang="ru">Написать нам</span><span data-lang="en">Write to us</span></h2>
+    <form class="support-form" id="supportForm" action="support.php" method="post">
+      <label class="hp-field" aria-hidden="true">Do not fill this field
+        <input type="text" name="hp" tabindex="-1" autocomplete="off">
+      </label>
+      <label><span data-lang="ru">Приложение</span><span data-lang="en">App</span>
+        <select name="app" id="supportApp">
+          <option value="videonyanya" data-ru="Видеоняня (Nestling Camera)" data-en="Nestling Camera (Video Nanny)">Видеоняня (Nestling Camera)</option>
+          <option value="garant" data-ru="Архив гарантий (Warranty Archive)" data-en="Warranty Archive">Архив гарантий (Warranty Archive)</option>
+          <option value="health-diary" data-ru="Дневник здоровья (Health Diary)" data-en="Health Diary">Дневник здоровья (Health Diary)</option>
+          <option value="other" data-ru="Общий вопрос" data-en="General question">Общий вопрос</option>
+        </select>
+      </label>
+      <label><span data-lang="ru">Ваш email (для ответа, необязательно)</span><span data-lang="en">Your email (for a reply, optional)</span>
+        <input type="email" name="email" autocomplete="email" inputmode="email">
+      </label>
+      <label><span data-lang="ru">Сообщение</span><span data-lang="en">Message</span>
+        <textarea name="message" required maxlength="5000" data-ph-ru="Опишите вопрос как можно подробнее…" data-ph-en="Describe your question in as much detail as possible…" placeholder="Опишите вопрос как можно подробнее…"></textarea>
+      </label>
+      <input type="hidden" name="lang" value="ru">
+      <button class="btn primary" type="submit" id="supportSubmit"><span data-lang="ru">Отправить</span><span data-lang="en">Send</span></button>
+      <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+    </form>
+    <p class="support-note" style="margin-top:14px"><span data-lang="ru">Не хотите заполнять форму? Напишите на <a href="mailto:appcreators.technolab@ya.ru">appcreators.technolab@ya.ru</a> — этот же адрес получает письма из формы. Отправляя форму, вы соглашаетесь на обработку указанных данных (сообщение, email и технические сведения) для ответа на обращение.</span><span data-lang="en">Prefer not to use the form? Write to <a href="mailto:appcreators.technolab@ya.ru">appcreators.technolab@ya.ru</a> — the same mailbox receives form messages. By submitting the form you consent to the processing of the provided data (message, email and technical details) to reply to your request.</span></p>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">© 2026 AppCreatorsTechnoLab · <a href="index.html"><span data-lang="ru">Все приложения</span><span data-lang="en">All apps</span></a> · <a href="legal.html"><span data-lang="ru">Правовые документы</span><span data-lang="en">Legal</span></a></div>
+</footer>
+<script src="assets/js/i18n.js?v=20261018" defer></script>
+<script>
+// Отправка формы без перезагрузки. Без JS форма отправляется обычным POST,
+// и этот путь держит support.php (он вернёт HTML-страницу результата).
+(function(){
+  var form = document.getElementById('supportForm');
+  if(!form) return;
+  var status = document.getElementById('formStatus');
+  var submit = document.getElementById('supportSubmit');
+  var select = document.getElementById('supportApp');
+  var textarea = form.querySelector('textarea[name="message"]');
+  var STR = {
+    ru: { sending:'Отправляем…', ok:'Сообщение отправлено. Спасибо! Ответим на указанную почту.',
+          invalid:'Проверьте поля формы: сообщение обязательно, email — если указан — должен быть корректным.',
+          rate_limited:'Слишком много отправок с вашего адреса. Попробуйте через час или напишите на appcreators.technolab@ya.ru.',
+          send_failed:'Не удалось отправить письмо. Напишите нам напрямую: appcreators.technolab@ya.ru.',
+          net:'Нет связи с сервером. Проверьте интернет или напишите на appcreators.technolab@ya.ru.',
+          send:'Отправить' },
+    en: { sending:'Sending…', ok:'Message sent. Thank you! We will reply to the address you provided.',
+          invalid:'Check the form fields: the message is required, and the email — if given — must be valid.',
+          rate_limited:'Too many submissions from your address. Try again in an hour or write to appcreators.technolab@ya.ru.',
+          send_failed:'Could not send the message. Please write to us directly: appcreators.technolab@ya.ru.',
+          net:'Cannot reach the server. Check your connection or write to appcreators.technolab@ya.ru.',
+          send:'Send' }
+  };
+  function lang(){ return document.documentElement.lang === 'en' ? 'en' : 'ru'; }
+  // Опции select и placeholder не умеют data-lang (браузер берёт textContent
+  // опции), поэтому язык для них ставим здесь.
+  function syncDynamic(){
+    var L = lang();
+    Array.prototype.forEach.call(select.options, function(o){
+      var t = o.getAttribute('data-' + L);
+      if (t) o.textContent = t;
+    });
+    if (textarea.getAttribute('data-ph-' + L)) textarea.setAttribute('placeholder', textarea.getAttribute('data-ph-' + L));
+  }
+  // Предзаполнение приложения из ?app= — на эти ссылки ведёт App Store.
+  var preselect = null;
+  var m = location.search.match(/[?&]app=([a-z-]+)/);
+  if (m && select.querySelector('option[value="' + m[1] + '"]')) { preselect = m[1]; select.value = preselect; }
+  window.addEventListener('langchange', syncDynamic);
+  syncDynamic();
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if (submit.disabled) return;
+    var L = lang();
+    var ruSpan = submit.querySelector('[data-lang="ru"]');
+    var enSpan = submit.querySelector('[data-lang="en"]');
+    ruSpan.textContent = STR.ru.sending;
+    enSpan.textContent = STR.en.sending;
+    submit.disabled = true;
+    status.className = 'form-status busy';
+    status.textContent = STR[L].sending;
+    fetch(form.getAttribute('action') || 'support.php', {
+      method: 'POST',
+      headers: { 'X-Requested-With': 'fetch' },
+      body: new FormData(form)
+    }).then(function(r){
+      return r.json().catch(function(){ return null; }).then(function(data){
+        return { status: r.status, data: data };
+      });
+    }).then(function(res){
+      var key = (res.data && res.data.error) ? res.data.error : (res.status === 200 ? 'ok' : 'send_failed');
+      var text = (res.data && res.data.message) || STR[L][key] || STR[L].send_failed;
+      status.textContent = text;
+      status.className = 'form-status ' + (res.status === 200 ? 'ok' : 'err');
+      if (res.status === 200) {
+        form.reset();
+        if (preselect) select.value = preselect;
+      }
+    }).catch(function(){
+      status.textContent = STR[L].net;
+      status.className = 'form-status err';
+    }).then(function(){
+      ruSpan.textContent = STR.ru.send;
+      enSpan.textContent = STR.en.send;
+      submit.disabled = false;
+    });
+  });
+})();
+</script>
+</body>
+</html>

@@ -12,3 +12,4 @@ ai-config*
 # ключей он не является, поэтому вынесен отдельной строкой.
 diag.php
 .playwright-mcp/
+docs/
