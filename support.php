@@ -21,7 +21,7 @@ const RATE_STALE_AFTER = 172800;
 
 // Названия для темы письма: ключ формы => [RU, EN].
 $SUPPORT_APPS = array(
-    'videonyanya' => array('Видеоняня (Nestling Camera)', 'Nestling Camera (Video Nanny)'),
+    'videonyanya' => array('Видеоняня (BabyCamera Free)', 'BabyCamera Free (Video Nanny)'),
     'garant' => array('Архив гарантий (Warranty Archive)', 'Warranty Archive'),
     'health-diary' => array('Дневник здоровья (Health Diary)', 'Health Diary'),
     'other' => array('Общий вопрос', 'General question'),
