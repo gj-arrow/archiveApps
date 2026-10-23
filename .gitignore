@@ -13,3 +13,4 @@ ai-config*
 diag.php
 .playwright-mcp/
 docs/
+*.apk

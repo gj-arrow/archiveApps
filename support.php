@@ -24,6 +24,7 @@ $SUPPORT_APPS = array(
     'videonyanya' => array('Видеоняня (BabyCamera Free)', 'BabyCamera Free (Video Nanny)'),
     'garant' => array('Архив гарантий (Warranty Archive)', 'Warranty Archive'),
     'health-diary' => array('Дневник здоровья (Health Diary)', 'Health Diary'),
+    'iskorka' => array('Копим с Искоркой (Sparky Savings)', 'Sparky Savings'),
     'other' => array('Общий вопрос', 'General question'),
 );
 
