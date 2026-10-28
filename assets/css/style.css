@@ -132,22 +132,7 @@ h1 span span{
 .lead{color:var(--muted);font-size:clamp(16px,1.6vw,19px);max-width:66ch;text-wrap:pretty}
 .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
 
-/* Статистика под hero: крупная цифра + подпись, стекло с hairline */
-.hero-stats{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;
-  margin-top:52px;border:1px solid var(--line);border-radius:var(--radius-m);overflow:hidden;
-  background:var(--line);
-}
-.hero-stats>div{
-  background:rgba(13,17,36,.72);padding:20px 22px;
-  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
-}
-.hero-stats b{
-  display:block;font-size:clamp(26px,3vw,34px);font-weight:750;letter-spacing:-.03em;line-height:1.1;
-  background:linear-gradient(92deg,#c3b8ff,var(--sky));
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-}
-.hero-stats span{color:var(--muted);font-size:13.5px}
+
 
 /* Появление hero при загрузке — каскад */
 .hero>*{animation:rise .8s var(--ease) both}
@@ -467,8 +452,6 @@ html[lang="en"] [data-lang="ru"]{display:none !important}
   .lead{font-size:15.5px}
   .hero-cta{margin-top:26px}
   .hero-cta .btn{flex:1 1 100%;min-height:50px}
-  .hero-stats{margin-top:36px;grid-template-columns:repeat(2,1fr)}
-  .hero-stats>div{padding:16px 18px}
 
   .apps{margin-top:40px}
   .card-go{top:18px;right:18px;width:18px;height:18px}
