@@ -31,10 +31,6 @@ const CONNECT_TIMEOUT = 8;
 // Числа держатся в паре с потолком RecognitionService.overallTimeout:
 // сумма ENGINE_TIMEOUT (13+43+13 = 69) + запас 11 с = 80. Поднять одно молча
 // нельзя — приложение срежет ответ раньше, чем прокси его отдаст.
-// Автобиограф (Flutter, lib/services/brain/llm_brain.dart) живёт со своим
-// потолком 30 с: ему хватает local, при падении local деградирует в
-// офлайн-интервью и возвращает сеть через 4 вопроса - длинный хвост цепочки
-// (gigachat/yandexgpt) он подхватывает уже на ретрае.
 // Делёж route_timeout на боевые движки больше не действует: build_routes()
 // везёт 'budget' => engine_timeout($engine) в каждом маршруте, и именно
 // его CURLOPT_TIMEOUT и берёт. Поэтому цепочка моделей внутри одного
@@ -45,8 +41,21 @@ const CONNECT_TIMEOUT = 8;
 // съедает его один раз и уходит в паузу, а отказ уровня модели приходит
 // как 400 и паузу не ставит - такие попытки дешёвые. Длинная цепочка
 // опасна только если залипает на каждом маршруте по полному бюджету.
-const ENGINE_TIMEOUT = array('local' => 13, 'opencode' => 43,
-    'gigachat' => 15, 'yandexgpt' => 13, 'openrouter' => 13);
+const ENGINE_TIMEOUT = array('local' => 13, 'opencode' => 43, 'openrouter' => 13);
+// Запасной список бесплатных диалоговых моделей openrouter для текстовой
+// задачи (флаг task=text в теле запроса, см. provider_models). Диалоговому
+// приложению хватит :free, распознаванию нужны зрячие модели из 'models'.
+// Подразумевается, что боевой список живёт в ai-config.php ('models_text'
+// у провайдера openrouter) — он и правится; id-шники :free меняются, список
+// здесь только спасает конфиг, о текстовой задаче не знающий. Первая —
+// автороутинг OpenRouter: сам выбирает любую доступную бесплатную модель.
+// Проверено живьём по русскому диалоговому промпту 2026-10: автороутинг
+// и оба nemotron отвечают содержательно за 1.5-4 с.
+const TEXT_OPENROUTER_FALLBACK_MODELS = array(
+    'openrouter/free',
+    'nvidia/nemotron-3.5-lightning:free',
+    'nvidia/nemotron-3-ultra-550b-a55b:free',
+);
 const MAX_BODY_BYTES = 8388608;
 // Лимит поднят решением владельца с 6 до 30: за одним публичным IP мобильного
 // оператора сидят сотни абонентов, и 6 в минуту доставалось бы примерно трём
@@ -332,77 +341,40 @@ function engine_config($engine) {
 }
 
 /**
- * Access-токен GigaChat с файловым кэшем. Секрет из ai-config.php
- * ('gigachat'['key']) — уже Base64-строка из кабинета Сбера, уходит
- * как Basic как есть. Токен живёт ~30 минут, кэш истекает за 2 минуты
- * до его конца. Файл в sys_get_temp_dir() с суффиксом счётчика — чужой
- * аккаунт на шаред-хостинге не подложит свой. Любая ошибка -> '' ->
- * маршрут пропускается, цепочка живёт.
+ * Список моделей провайдера под задачу.
+ *
+ * Распознавание (task=image или флаг отсутствует — так работают все
+ * существующие приложения) идёт по 'models': там зрячие модели, отобранные
+ * под чеки. Текстовая задача (task=text — диалоговые приложения) сначала
+ * смотрит 'models_text', если он задан; движку openrouter без 'models_text'
+ * подставляется запасной список бесплатных моделей: openrouter в цепочке
+ * последний и служит текстовым приложениям резервом, а платить за диалог
+ * платным резервом из 'models' не нужно.
+ *
+ * @return array непустой список имён моделей или пустой массив, если
+ *              провайдер моделей не задал вовсе.
  */
-function gigachat_token($secret) {
-    $file = sys_get_temp_dir() . '/garant-ai-gigachat' . rate_state_suffix();
-    $now = time();
-    if (is_readable($file)) {
-        $data = json_decode((string)file_get_contents($file), true);
-        if (is_array($data)
-            && isset($data['token'], $data['expires'])
-            && is_string($data['token']) && $data['token'] !== ''
-            && (int)$data['expires'] > $now + 120) {
-            return $data['token'];
-        }
+function provider_models($p, $engine, $task) {
+    if ((string)$task === 'text'
+        && isset($p['models_text']) && is_array($p['models_text'])
+        && !empty($p['models_text'])) {
+        return $p['models_text'];
     }
-    $rquid = vsprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x', array(
-        mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff),
-        mt_rand(0, 0x0fff) | 0x4000, mt_rand(0, 0x3fff) | 0x8000,
-        mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff),
-    ));
-    $ch = curl_init('https://ngw.devices.sberbank.ru:9443/api/v2/oauth');
-    curl_setopt_array($ch, array(
-        CURLOPT_POST => true,
-        CURLOPT_POSTFIELDS => json_encode(array('scope' => 'GIGACHAT_API_PERS')),
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_TIMEOUT => 8,
-        CURLOPT_CONNECTTIMEOUT => CONNECT_TIMEOUT,
-        CURLOPT_SSL_VERIFYPEER => true,
-        CURLOPT_PROTOCOLS => CURLPROTO_HTTPS,
-        CURLOPT_HTTPHEADER => array(
-            'Authorization: Basic ' . $secret,
-            'RqUID: ' . $rquid,
-            'Content-Type: application/json',
-            'Accept: application/json',
-        ),
-    ));
-    $body = curl_exec($ch);
-    $status = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    $err = curl_error($ch);
-    curl_close($ch);
-    if ($body === false || $status !== 200) {
-        error_log(sprintf(
-            'ai_proxy gigachat_oauth_failed status=%d err=%s',
-            $status,
-            $err === '' ? '-' : $err
-        ));
-        return '';
+    if ((string)$task === 'text'
+        && (string)$engine === 'openrouter'
+        && !isset($p['models_text'])) {
+        return TEXT_OPENROUTER_FALLBACK_MODELS;
     }
-    $decoded = json_decode((string)$body, true);
-    if (!is_array($decoded) || !isset($decoded['access_token'])
-        || !is_string($decoded['access_token'])
-        || $decoded['access_token'] === '') {
-        error_log('ai_proxy gigachat_oauth_bad_body');
-        return '';
+    if (isset($p['models']) && is_array($p['models']) && !empty($p['models'])) {
+        return $p['models'];
     }
-    $token = $decoded['access_token'];
-    // expires_at в миллисекундах; без поля считаем 25 минут.
-    $expiresMs = isset($decoded['expires_at']) ? (int)$decoded['expires_at'] : 0;
-    $expires = $expiresMs > 0 ? (int)($expiresMs / 1000) : $now + 1500;
-    @file_put_contents($file, json_encode(array(
-        'token' => $token,
-        'expires' => $expires,
-    )));
-    return $token;
+    if (isset($p['model']) && $p['model'] !== '') {
+        return array($p['model']);
+    }
+    return array();
 }
 
-function build_routes($engine) {
+function build_routes($engine, $task) {
     // Недоступный движок не строит маршрутов вообще: цепочка идёт дальше,
     // не тратя ни секунды на сеть.
     if (engine_inactive($engine)) {
@@ -421,6 +393,9 @@ function build_routes($engine) {
             'url' => $config['url'],
             'key' => $config['key'],
             'models' => array($config['model']),
+            // Отдельный список моделей текстовой задачи: у провайдеров из
+            // $config он тоже может быть задан (см. provider_models).
+            'models_text' => isset($config['models_text']) ? $config['models_text'] : null,
             // num_ctx пробрасываем дальше: движок один, но маршрутом на шаге
             // opencode может оказаться именно он, и лимит контекста обязан
             // уйти с этим маршрутом, а не с именем движка.
@@ -437,24 +412,12 @@ function build_routes($engine) {
         if (!isset($p['url'], $p['key']) || $p['url'] === '' || $p['key'] === '') {
             continue;
         }
-        $models = array();
-        if (isset($p['models']) && is_array($p['models']) && !empty($p['models'])) {
-            $models = $p['models'];
-        } elseif (isset($p['model']) && $p['model'] !== '') {
-            $models = array($p['model']);
-        }
+        $models = provider_models($p, $engine, $task);
         if (empty($models)) {
             continue;
         }
         $host = parse_url($p['url'], PHP_URL_HOST);
         $needsSession = (strpos((string)$host, 'opencode') !== false);
-        // Схема авторизации: 'bearer' (OpenAI-совместимые по умолчанию),
-        // 'api-key' (Yandex Cloud: Authorization: Api-Key), 'gigachat'
-        // (OAuth Сбер: Bearer по токену из gigachat_token()).
-        $auth = isset($config['auth']) ? (string)$config['auth'] : 'bearer';
-        if ($auth !== 'api-key' && $auth !== 'gigachat') {
-            $auth = 'bearer';
-        }
         // Метка канала для клиента: 'primary' - основной провайдер, 'fallback' -
         // резервный. Это не имя провайдера и не модель, поэтому утечки в ответе
         // не происходит: тело по-прежнему пересобирается, model отбрасывается.
@@ -494,7 +457,6 @@ function build_routes($engine) {
             $routes[] = array(
                 'url' => upstream_chat_completions_url($p['url']),
                 'key' => $p['key'],
-                'auth' => $auth,
                 'model' => (string)$m,
                 'host' => (string)$host,
                 'label' => $label,
@@ -529,13 +491,13 @@ function build_routes($engine) {
         if (isset($first['url'], $first['key']) && $first['url'] !== '' && $first['key'] !== '') {
             provider_mark_success(parse_url($first['url'], PHP_URL_HOST));
             $host = parse_url($first['url'], PHP_URL_HOST);
-            $models = (isset($first['models']) && is_array($first['models']) && $first['models'])
-                ? $first['models']
-                : array(isset($first['model']) ? $first['model'] : '');
+            $models = provider_models($first, $engine, $task);
+            if (empty($models)) {
+                $models = array('');
+            }
             $routes[] = array(
                 'url' => upstream_chat_completions_url($first['url']),
                 'key' => $first['key'],
-                'auth' => $auth,
                 'model' => (string)$models[0],
                 'host' => (string)$host,
                 'label' => 'primary',
@@ -952,15 +914,19 @@ if (!is_array($incoming) || !isset($incoming['messages'])
     respond_json(400, array('error' => 'messages_required'));
 }
 
-// Цепочка движков единого пути: прокси сам обходит
-// local -> opencode -> gigachat -> yandexgpt -> openrouter.
-// gigachat (Lite, бесплатный тариф Сбера) и yandexgpt (копеечный Lite)
-// добавлены как бесплатные резервы; openrouter - платный последняя инстанция.
-// Пустой ключ движка в ai-config.php гасит его (engine_config -> 503), так
-// что недозарегистрированные движки просто отсутствуют в цепочке.
-// Отдельный путь local остаётся для дебага приложения.
+// Флаг задачи от клиента: 'text' — диалоговое приложение (например,
+// интервьюер-биограф), всё прочее — отсутствующий флаг, 'image', мусор —
+// прежнее поведение распознавания. По умолчанию image, чтобы существующие
+// приложения, о флаге не знающие, продолжали работать как раньше. Флаг
+// влияет только на выбор моделей (provider_models): цепочка движков одна.
+// Наверх апстриму флаг не переносится — тело пересобирается из messages.
+$task = (isset($incoming['task']) && $incoming['task'] === 'text') ? 'text' : 'image';
+
+// Цепочка движков единого пути: прокси сам обходит local -> opencode ->
+// openrouter. Отдельный путь local остаётся для дебага приложения.
+// От задачи движки не зависят: task=text меняет только модели openrouter.
 $chainEngines = ($engine === 'chain')
-    ? array('local', 'opencode', 'gigachat', 'yandexgpt', 'openrouter')
+    ? array('local', 'opencode', 'openrouter')
     : array($engine);
 // Тело пересобирается: messages берём у клиента (там промпт и фото), а модель
 // и лимиты — свои, по каждому маршруту. Клиент не может подсунуть дорогую
@@ -977,12 +943,12 @@ $outgoing = array(
 // ни секунды на сеть.
 $routes = array();
 foreach ($chainEngines as $subEngine) {
-    foreach (build_routes($subEngine) as $route) {
+    foreach (build_routes($subEngine, $task) as $route) {
         $routes[] = $route;
     }
 }
 if (empty($routes)) {
-    log_reject($engine, $path, 503, 'no_routes');
+    log_reject($engine, $path, 503, 'no_routes task=' . $task);
     respond_json(503, array('error' => 'upstream_unavailable'));
 }
 
@@ -1025,25 +991,10 @@ foreach ($routes as $route) {
     }
 
 $headers = array(
+    'Authorization: Bearer ' . $route['key'],
     'Content-Type: application/json',
     'User-Agent: garant-proxy/1.0',
 );
-if ($route['auth'] === 'api-key') {
-    $headers[] = 'Authorization: Api-Key ' . $route['key'];
-} elseif ($route['auth'] === 'gigachat') {
-    // OAuth Сбера: секрет кабинета -> короткоживущий access_token
-    // с файловым кэшем. Пустой токен = маршрут пропускается, цепочка живёт.
-    $gigaToken = gigachat_token($route['key']);
-    if ($gigaToken === '') {
-        log_reject('gigachat', $path, 502, 'gigachat_token_failed');
-        provider_mark_failure($route['host']);
-        $seenFailedHosts[$route['host']] = true;
-        continue;
-    }
-    $headers[] = 'Authorization: Bearer ' . $gigaToken;
-} else {
-    $headers[] = 'Authorization: Bearer ' . $route['key'];
-}
     // x-opencode-session нужен только провайдерам семейства opencode: без него
     // OpenCode Go отвечает 400 MissingSessionID. OpenRouter такого заголовка не
     // требует, а лишний ему не вредит, но неразборчиво слать его всем подряд.
@@ -1086,10 +1037,11 @@ if ($route['auth'] === 'api-key') {
     $ms = (int)round((microtime(true) - $started) * 1000);
 
     error_log(sprintf(
-        'ai_proxy try=%d/%d engine=%s model=%s host=%s ip=%s status=%d ms=%d bytes=%d err=%s',
+        'ai_proxy try=%d/%d engine=%s task=%s model=%s host=%s ip=%s status=%d ms=%d bytes=%d err=%s',
         $tried,
         count($routes),
         $engine,
+        $task,
         $route['model'],
         $route['host'],
         substr(sha1($ip), 0, 12),
