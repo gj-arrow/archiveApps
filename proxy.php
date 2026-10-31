@@ -31,6 +31,10 @@ const CONNECT_TIMEOUT = 8;
 // Числа держатся в паре с потолком RecognitionService.overallTimeout:
 // сумма ENGINE_TIMEOUT (13+43+13 = 69) + запас 11 с = 80. Поднять одно молча
 // нельзя — приложение срежет ответ раньше, чем прокси его отдаст.
+// Автобиограф (Flutter, lib/services/brain/llm_brain.dart) живёт со своим
+// потолком 30 с: ему хватает local, при падении local деградирует в
+// офлайн-интервью и возвращает сеть через 4 вопроса - длинный хвост цепочки
+// (gigachat/yandexgpt) он подхватывает уже на ретрае.
 // Делёж route_timeout на боевые движки больше не действует: build_routes()
 // везёт 'budget' => engine_timeout($engine) в каждом маршруте, и именно
 // его CURLOPT_TIMEOUT и берёт. Поэтому цепочка моделей внутри одного
@@ -41,7 +45,8 @@ const CONNECT_TIMEOUT = 8;
 // съедает его один раз и уходит в паузу, а отказ уровня модели приходит
 // как 400 и паузу не ставит - такие попытки дешёвые. Длинная цепочка
 // опасна только если залипает на каждом маршруте по полному бюджету.
-const ENGINE_TIMEOUT = array('local' => 13, 'opencode' => 43, 'openrouter' => 13);
+const ENGINE_TIMEOUT = array('local' => 13, 'opencode' => 43,
+    'gigachat' => 15, 'yandexgpt' => 13, 'openrouter' => 13);
 const MAX_BODY_BYTES = 8388608;
 // Лимит поднят решением владельца с 6 до 30: за одним публичным IP мобильного
 // оператора сидят сотни абонентов, и 6 в минуту доставалось бы примерно трём
@@ -326,6 +331,77 @@ function engine_config($engine) {
     return $config;
 }
 
+/**
+ * Access-токен GigaChat с файловым кэшем. Секрет из ai-config.php
+ * ('gigachat'['key']) — уже Base64-строка из кабинета Сбера, уходит
+ * как Basic как есть. Токен живёт ~30 минут, кэш истекает за 2 минуты
+ * до его конца. Файл в sys_get_temp_dir() с суффиксом счётчика — чужой
+ * аккаунт на шаред-хостинге не подложит свой. Любая ошибка -> '' ->
+ * маршрут пропускается, цепочка живёт.
+ */
+function gigachat_token($secret) {
+    $file = sys_get_temp_dir() . '/garant-ai-gigachat' . rate_state_suffix();
+    $now = time();
+    if (is_readable($file)) {
+        $data = json_decode((string)file_get_contents($file), true);
+        if (is_array($data)
+            && isset($data['token'], $data['expires'])
+            && is_string($data['token']) && $data['token'] !== ''
+            && (int)$data['expires'] > $now + 120) {
+            return $data['token'];
+        }
+    }
+    $rquid = vsprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x', array(
+        mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff),
+        mt_rand(0, 0x0fff) | 0x4000, mt_rand(0, 0x3fff) | 0x8000,
+        mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff),
+    ));
+    $ch = curl_init('https://ngw.devices.sberbank.ru:9443/api/v2/oauth');
+    curl_setopt_array($ch, array(
+        CURLOPT_POST => true,
+        CURLOPT_POSTFIELDS => json_encode(array('scope' => 'GIGACHAT_API_PERS')),
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_TIMEOUT => 8,
+        CURLOPT_CONNECTTIMEOUT => CONNECT_TIMEOUT,
+        CURLOPT_SSL_VERIFYPEER => true,
+        CURLOPT_PROTOCOLS => CURLPROTO_HTTPS,
+        CURLOPT_HTTPHEADER => array(
+            'Authorization: Basic ' . $secret,
+            'RqUID: ' . $rquid,
+            'Content-Type: application/json',
+            'Accept: application/json',
+        ),
+    ));
+    $body = curl_exec($ch);
+    $status = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $err = curl_error($ch);
+    curl_close($ch);
+    if ($body === false || $status !== 200) {
+        error_log(sprintf(
+            'ai_proxy gigachat_oauth_failed status=%d err=%s',
+            $status,
+            $err === '' ? '-' : $err
+        ));
+        return '';
+    }
+    $decoded = json_decode((string)$body, true);
+    if (!is_array($decoded) || !isset($decoded['access_token'])
+        || !is_string($decoded['access_token'])
+        || $decoded['access_token'] === '') {
+        error_log('ai_proxy gigachat_oauth_bad_body');
+        return '';
+    }
+    $token = $decoded['access_token'];
+    // expires_at в миллисекундах; без поля считаем 25 минут.
+    $expiresMs = isset($decoded['expires_at']) ? (int)$decoded['expires_at'] : 0;
+    $expires = $expiresMs > 0 ? (int)($expiresMs / 1000) : $now + 1500;
+    @file_put_contents($file, json_encode(array(
+        'token' => $token,
+        'expires' => $expires,
+    )));
+    return $token;
+}
+
 function build_routes($engine) {
     // Недоступный движок не строит маршрутов вообще: цепочка идёт дальше,
     // не тратя ни секунды на сеть.
@@ -372,6 +448,13 @@ function build_routes($engine) {
         }
         $host = parse_url($p['url'], PHP_URL_HOST);
         $needsSession = (strpos((string)$host, 'opencode') !== false);
+        // Схема авторизации: 'bearer' (OpenAI-совместимые по умолчанию),
+        // 'api-key' (Yandex Cloud: Authorization: Api-Key), 'gigachat'
+        // (OAuth Сбер: Bearer по токену из gigachat_token()).
+        $auth = isset($config['auth']) ? (string)$config['auth'] : 'bearer';
+        if ($auth !== 'api-key' && $auth !== 'gigachat') {
+            $auth = 'bearer';
+        }
         // Метка канала для клиента: 'primary' - основной провайдер, 'fallback' -
         // резервный. Это не имя провайдера и не модель, поэтому утечки в ответе
         // не происходит: тело по-прежнему пересобирается, model отбрасывается.
@@ -411,6 +494,7 @@ function build_routes($engine) {
             $routes[] = array(
                 'url' => upstream_chat_completions_url($p['url']),
                 'key' => $p['key'],
+                'auth' => $auth,
                 'model' => (string)$m,
                 'host' => (string)$host,
                 'label' => $label,
@@ -451,6 +535,7 @@ function build_routes($engine) {
             $routes[] = array(
                 'url' => upstream_chat_completions_url($first['url']),
                 'key' => $first['key'],
+                'auth' => $auth,
                 'model' => (string)$models[0],
                 'host' => (string)$host,
                 'label' => 'primary',
@@ -867,10 +952,15 @@ if (!is_array($incoming) || !isset($incoming['messages'])
     respond_json(400, array('error' => 'messages_required'));
 }
 
-// Цепочка движков единого пути: прокси сам обходит local -> opencode ->
-// openrouter. Отдельный путь local остаётся для дебага приложения.
+// Цепочка движков единого пути: прокси сам обходит
+// local -> opencode -> gigachat -> yandexgpt -> openrouter.
+// gigachat (Lite, бесплатный тариф Сбера) и yandexgpt (копеечный Lite)
+// добавлены как бесплатные резервы; openrouter - платный последняя инстанция.
+// Пустой ключ движка в ai-config.php гасит его (engine_config -> 503), так
+// что недозарегистрированные движки просто отсутствуют в цепочке.
+// Отдельный путь local остаётся для дебага приложения.
 $chainEngines = ($engine === 'chain')
-    ? array('local', 'opencode', 'openrouter')
+    ? array('local', 'opencode', 'gigachat', 'yandexgpt', 'openrouter')
     : array($engine);
 // Тело пересобирается: messages берём у клиента (там промпт и фото), а модель
 // и лимиты — свои, по каждому маршруту. Клиент не может подсунуть дорогую
@@ -935,10 +1025,25 @@ foreach ($routes as $route) {
     }
 
 $headers = array(
-    'Authorization: Bearer ' . $route['key'],
     'Content-Type: application/json',
     'User-Agent: garant-proxy/1.0',
 );
+if ($route['auth'] === 'api-key') {
+    $headers[] = 'Authorization: Api-Key ' . $route['key'];
+} elseif ($route['auth'] === 'gigachat') {
+    // OAuth Сбера: секрет кабинета -> короткоживущий access_token
+    // с файловым кэшем. Пустой токен = маршрут пропускается, цепочка живёт.
+    $gigaToken = gigachat_token($route['key']);
+    if ($gigaToken === '') {
+        log_reject('gigachat', $path, 502, 'gigachat_token_failed');
+        provider_mark_failure($route['host']);
+        $seenFailedHosts[$route['host']] = true;
+        continue;
+    }
+    $headers[] = 'Authorization: Bearer ' . $gigaToken;
+} else {
+    $headers[] = 'Authorization: Bearer ' . $route['key'];
+}
     // x-opencode-session нужен только провайдерам семейства opencode: без него
     // OpenCode Go отвечает 400 MissingSessionID. OpenRouter такого заголовка не
     // требует, а лишний ему не вредит, но неразборчиво слать его всем подряд.
