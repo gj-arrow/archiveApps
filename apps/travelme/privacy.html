@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TravelMe — Политика конфиденциальности · AppCreatorsTechnoLab</title>
+<meta name="description" content="Политика конфиденциальности TravelMe от AppCreatorsTechnoLab. RU + EN.">
+<link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../assets/css/style.css?v=20261026-7">
+</head>
+<body data-app="travelme" data-title-ru="TravelMe — Политика конфиденциальности · AppCreatorsTechnoLab" data-title-en="TravelMe — Privacy Policy · AppCreatorsTechnoLab">
+<header class="site"><div class="wrap nav">
+<a class="logo" href="../../index.html"><span class="logo-mark">AT</span><span>AppCreatorsTechnoLab<small><span data-lang="ru">сборник приложений</span><span data-lang="en">app collection</span></small></span></a>
+<nav class="nav-links"><a href="../../index.html"><span data-lang="ru">Приложения</span><span data-lang="en">Apps</span></a><a class="active" href="../../legal.html"><span data-lang="ru">Правовые документы</span><span data-lang="en">Legal</span></a><a href="../../support.html"><span data-lang="ru">Поддержка</span><span data-lang="en">Support</span></a></nav>
+</div></header>
+<main class="wrap">
+  <p class="breadcrumb"><a href="../../index.html"><span data-lang="ru">Главная</span><span data-lang="en">Home</span></a> / <a href="../../legal.html"><span data-lang="ru">Правовые документы</span><span data-lang="en">Legal documents</span></a> / <span data-lang="ru">TravelMe · Политика конфиденциальности</span><span data-lang="en">TravelMe · Privacy Policy</span></p>
+  <section class="section"><div class="legal">
+    <div data-lang="ru">
+    <h1>Политика конфиденциальности TravelMe</h1>
+    <div class="meta"><span>AppCreatorsTechnoLab</span><span>·</span><span>TravelMe</span></div>
+    <div class="doc">Политика конфиденциальности TravelMe · AppCreatorsTechnoLab · TravelMe · Редакция от 7 ноября 2026 г.
+
+1. Общие положения
+Используя Приложение, вы даёте владельцу Приложения согласие на обработку своих персональных данных в объёме, целях и в сроки, описанные в настоящей Политике. Отзыв согласия — в порядке раздела 5.
+
+1.1. Настоящая Политика описывает, какие персональные данные обрабатывает мобильное приложение «TravelMe» (далее — «Приложение») — личный трекер посещённых стран, городов и регионов, — зачем они нужны и кому передаются.
+
+1.2. Ключевой принцип: без входа в аккаунт ваши записи хранятся только на вашем устройстве. Аккаунт создаётся по вашему желанию — он нужен для синхронизации между устройствами, резервной копии в облаке и рейтинга. Без аккаунта Приложение полноценно работает офлайн, и содержимое ваших записей не покидает устройство.
+
+1.3. Актуальная редакция Политики опубликована по адресу: https://appcreatores.win/apps/travelme/privacy.html
+
+1.4. Используя Приложение, вы подтверждаете, что ознакомились с настоящей Политикой. Если вы не согласны — не используйте Приложение.
+
+2. Какие данные обрабатывает Приложение
+2.1. Аккаунт (создаётся по желанию). Для синхронизации, облачного хранения и рейтинга:
+— адрес электронной почты и пароль — при регистрации по e-mail; пароль передаётся и хранится только у провайдера аутентификации (Supabase Auth) и недоступен владельцу Приложения;
+— при входе через Apple ID провайдеру аутентификации передаётся идентификатор вашего Apple ID;
+— идентификатор пользователя (случайный UUID), присваиваемый аккаунту;
+— настройка «Показывать меня в рейтинге».
+
+2.2. Данные путешествий, которые вы вводите сами:
+— визиты: страна, способ отметки (вручную, по геолокации или по фотографии), дата начала и окончания, число дней, число поездок, заметки;
+— отметки городов и регионов;
+— обложки визитов и отметки «обложка альбома» у фотографий.
+
+2.3. Фотографии поездок. Вы прикрепляете фотографии к визитам:
+— из исходного файла на устройстве читается EXIF: координаты снимка и дата съёмки — чтобы поставить отметку по фотографии и заполнить даты визита;
+— фотография сжимается на устройстве (длинная сторона до 2048 пикселей, формат JPEG); в Приложении и в облаке хранится сжатая копия, исходный файл остаётся в вашей галерее нетронутым;
+— при пересжатии EXIF из файла удаляется: координаты снимка сохраняются отдельными полями в метаданных фотографии в базе данных, а не внутри файла;
+— без входа в аккаунт фотографии хранятся только на устройстве.
+
+2.4. Геолокация. Если вы разрешите доступ, Приложение определяет ваши координаты в момент отметки, чтобы определить страну, где вы находитесь. Обработка координат выполняется на устройстве, в том числе средствами геокодера операционной системы. В облачную запись визита попадает только страна (а также город или регион, если вы их отметили). Координаты, извлечённые из EXIF фотографии, сохраняются в метаданных этой фотографии — см. п. 2.3.
+
+2.5. Статистика и рейтинг (только при входе в аккаунт):
+— агрегированная статистика: общее и подтверждённое число стран, число дней в пути, число визитов, очки и уровень;
+— она отображается в общем рейтинге пользователей: очки, уровень, число подтверждённых стран и имя профиля, если вы его указали;
+— своё присутствие в рейтинге можно отключить в настройках («Показывать меня в рейтинге») — тогда ваши показатели скрываются из общего рейтинга;
+— сервер рассчитывает для вас процентиль («вы побывали в большем числе стран, чем N% пользователей») на основании той же статистики.
+
+2.6. Данные рекламного модуля. Приложение бесплатное и показывает рекламу рекламной сети Яндекс (Yandex Mobile Ads): баннер на отдельных экранах и полноэкранное объявление при запуске Приложения — не на первом запуске после установки и не чаще одного раза в 3 часа. Рекламная сеть обрабатывает:
+— рекламный идентификатор устройства (IDFA / Android Advertising ID);
+— тип устройства, версию операционной системы и Приложения, язык;
+— сведения о взаимодействии с рекламой: показы и клики;
+— приблизительное местоположение, определённое по IP-адресу.
+
+Рекламный модуль может использовать эти данные для подбора объявлений. Эти данные не передаются владельцу Приложения. Подробнее об обработке данных Яндексом — в Политике конфиденциальности Яндекса: https://yandex.ru/legal/confidential/.
+
+2.7. Карты. Карта мира отображается по данным OpenStreetMap: тайлы (фрагменты карты) загружаются с серверов tile.openstreetmap.org. При загрузке тайлов сервер видит ваш IP-адрес и запрашиваемые фрагменты карты. Ваши записи и координаты на серверы OpenStreetMap не передаются.
+
+2.8. Чего Приложение не запрашивает: телефон, почтовый адрес, платёжные реквизиты, контакты из адресной книги, историю звонков и переписку, доступ к камере. Аккаунт для базовой работы Приложения не требуется.
+
+2.9. Журнал ошибок и технические сведения о работе Приложения формируются и хранятся только на устройстве, наружу не передаются.
+
+3. Где хранятся данные
+3.1. На устройстве: визиты, отметки, метаданные фотографий и настройки — в локальной базе SQLite в защищённой области Приложения; сами фотографии — сжатые копии в файловом хранилище Приложения. ПИН-код в виде хеша и настройка биометрии — в системном защищённом хранилище (iOS Keychain / Android Keystore). Данные удаляются в любой момент через интерфейс Приложения или вместе с удалением Приложения.
+
+3.2. В облаке (только при входе в аккаунт): данные из пп. 2.1–2.5 хранятся у провайдера Supabase (база данных PostgreSQL и файловое хранилище) — отдельно для каждого аккаунта. Доступ к вашим строкам базы и файлам закрыт правилами на уровне строк: другие пользователи Приложения их не видят, владелец Приложения их не просматривает.
+
+3.3. ПИН-код и биометрия в облако не передаются: синхронизируются только данные путешествий. Биометрические данные (Face ID / отпечаток пальца) обрабатываются исключительно операционной системой устройства и никогда его не покидают; Приложение получает от системы только результат проверки — «успешно» или «неуспешно».
+
+3.4. На серверах владельца постоянного хранения ваших данных не производится: облачное хранилище Приложения — база и файловое хранилище Supabase (п. 3.2). Содержимое ваших записей покидает устройство также при отправке вами письма в поддержку — см. раздел 4.
+
+4. Куда передаются данные
+4.1. Supabase — провайдер аутентификации, базы данных и файлового хранилища (только при входе в аккаунт): данные из пп. 2.1–2.5.
+
+4.2. Рекламная сеть Яндекс — самостоятельный контролёр данных в отношении сведений из п. 2.6. Владелец не продаёт и не передаёт рекламной сети содержимое ваших записей и фотографий.
+
+4.3. Серверы тайлов OpenStreetMap — запрашиваемые фрагменты карты и IP-адрес (п. 2.7).
+
+4.4. Apple — при входе через Apple ID (п. 2.1).
+
+4.5. Поддержка. В Приложении нет встроенной формы поддержки: вы сами пишете на appcreators.technolab@ya.ru или через страницу https://appcreatores.win/support.html. Обрабатываются ваше сообщение, адрес электронной почты для ответа и имя, если вы его указали. Диагностика устройства, версия Приложения и ваши записи к письму автоматически не прикрепляются.
+
+4.6. Системный диалог «Поделиться». Экспортированные файлы (PDF-отчёт, видео-итог года, карточка статистики) передаются только туда, куда вы сами направите их этим диалогом.
+
+4.7. Владелец не продаёт, не арендует и не передаёт персональные данные третьим лицам для маркетинговых целей.
+
+5. Сроки хранения и отзыв согласия
+5.1. Локальные данные хранятся на вашем устройстве столько, сколько вы их храните; удаление Приложения стирает их безвозвратно.
+
+5.2. Облачные данные (при входе в аккаунт) хранятся, пока существует аккаунт. Удаление визита, отметки или фотографии в Приложении при активном интернете удаляет их и из облака, включая файлы фотографий. Для полного удаления аккаунта и всех связанных данных напишите на appcreators.technolab@ya.ru — мы удалим аккаунт и данные из базы и файлового хранилища.
+
+5.3. Обращение в поддержку хранится в электронной почте владельца не более 12 месяцев с даты обращения, после чего удаляется.
+
+5.4. Согласие на обработку данных в рекламных целях отзывается изменением настроек конфиденциальности и рекламы в операционной системе либо удалением Приложения. На устройствах Apple система дополнительно запрашивает разрешение на отслеживание (ATT) — стандартный диалог операционной системы; запрос показывается до инициализации рекламного модуля. Отказ не ограничивает доступ к функциям Приложения; реклама в этом случае показывается в менее персонализированном виде.
+
+5.5. Участие в рейтинге отключается в настройках Приложения в любой момент; после отключения ваши показатели перестают отображаться в общем рейтинге.
+
+5.6. Отзыв согласия не имеет обратной силы: он не распространяется на обработку, уже завершённую к моменту отзыва. Обработка, необходимая для исполнения соглашения с вами и не требующая отдельного согласия, продолжается, пока действует это соглашение.
+
+6. Разрешения устройства
+6.1. Геолокация (точная и приблизительная, только во время использования Приложения) — чтобы определить страну, где вы находитесь, и отметить визит. Без разрешения отметки ставятся вручную или по фотографии.
+
+6.2. Фотогалерея — чтобы выбрать фотографии поездок и прикрепить их к визитам (на Android используется системный выбор фотографий, на iOS — доступ к галерее). Камера Приложением не используется.
+
+6.3. Face ID / биометрия — для быстрой разблокировки Приложения (вместе с опциональным ПИН-кодом).
+
+6.4. Приложение запрашивает только эти разрешения и только для перечисленных целей. Отказ от разрешения не блокирует остальные функции; отозвать разрешение можно в настройках устройства в любой момент.
+
+7. Безопасность
+7.1. Передача данных в облако и к провайдерам выполняется по защищённому соединению HTTPS; доступ к облачным данным закрывается правилами на уровне строк базы данных. Для защиты локальных данных доступны ПИН-код и биометрическая разблокировка.
+
+7.2. Ни один способ хранения не даёт абсолютной гарантии. Мы рекомендуем включить блокировку Приложения и системную блокировку устройства.
+
+8. Дети
+8.1. Приложение не предназначено для самостоятельного использования лицами младше 14 лет. Лица младше 14 лет используют Приложение с согласия законных представителей.
+
+8.2. Аккаунт и участие в рейтинге доступны только пользователям старше 14 лет. Данные о детях Приложение не запрашивает и не обрабатывает.
+
+9. Ваши права
+9.1. Вы вправе:
+— знать, какие данные обрабатываются, и получить сведения о составе и целях обработки;
+— отозвать согласие на любую из обработок — см. раздел 5;
+— ограничить или отозвать разрешения на доступ к устройству.
+
+9.2. Большую часть прав вы реализуете непосредственно в Приложении: доступ, изменение и удаление записей (локально и в облаке), экспорт данных (PDF-отчёт, видео-итог года, карточка), отключение рейтинга. Полное удаление аккаунта — письмом на appcreators.technolab@ya.ru (п. 5.2).
+
+10. Изменения Политики
+10.1. Политика может быть изменена. Новая редакция публикуется по адресу https://appcreatores.win/apps/travelme/privacy.html, дата редакции указана на этой странице. О существенных изменениях Приложение сообщает обновлением.
+
+10.2. Продолжение использования Приложения после публикации новой редакции означает согласие с ней.
+
+11. Контакты
+Владелец и оператор Приложения: физическое лицо Ховрин Александр (ALIAKSANDR KHOURYN).
+Контакты для обращений по вопросам обработки персональных данных: appcreators.technolab@ya.ru</div>
+    </div>
+    <div data-lang="en">
+    <h1>Privacy Policy</h1>
+    <div class="meta"><span>AppCreatorsTechnoLab</span><span>·</span><span>TravelMe</span></div>
+<div class="doc">Privacy Policy of the "TravelMe" app · AppCreatorsTechnoLab · TravelMe · Last updated: November 7, 2026
+
+1. General provisions
+By using the App you give the App owner's consent to the processing of your personal data within the scope, purposes and retention periods described in this Policy. You can withdraw consent as set out in section 5.
+
+1.1. This Policy describes which personal data the "TravelMe" mobile app (the "App") — a personal tracker of visited countries, cities and regions — processes, why it needs it, and to whom it is transferred.
+
+1.2. Key principle: without signing in, your records are stored on your device only. An account is created at your option — it is needed for syncing between devices, an off-device backup and the leaderboard. Without an account the App works fully offline and the contents of your records never leave your device.
+
+1.3. The current revision of the Policy is published at https://appcreatores.win/apps/travelme/privacy.html
+
+1.4. By using the App you confirm that you have read this Policy. If you do not agree — do not use the App.
+
+2. What data the App processes
+2.1. Account (created at your option). For syncing, cloud storage and the leaderboard:
+— an email address and password — when you register by e-mail; the password is transmitted and stored only by the authentication provider (Supabase Auth) and is not accessible to the App owner;
+— when you sign in with your Apple ID, the identifier of your Apple ID is passed to the authentication provider;
+— a user identifier (a random UUID) assigned to the account;
+— the "Show me in the leaderboard" setting.
+
+2.2. Travel data you enter yourself:
+— visits: the country, how it was marked (manually, by geolocation or by photograph), start and end date, number of days, number of trips, notes;
+— city and region marks;
+— visit covers and "album cover" marks on photos.
+
+2.3. Travel photos. You attach photos to visits:
+— EXIF is read from the original file on your device: the shot coordinates and capture time — to place a mark from a photo and to fill in visit dates;
+— the photo is compressed on the device (long side up to 2048 pixels, JPEG); the App and the cloud store the compressed copy, while the original file stays untouched in your gallery;
+— re-encoding strips the EXIF from the file: the shot coordinates are kept as separate fields in the photo's database metadata, not inside the file;
+— without an account, photos are stored on your device only.
+
+2.4. Geolocation. If you grant access, the App determines your coordinates at the moment of marking to detect the country you are in. Coordinate processing happens on the device, including through the operating system's geocoder. Only the country (plus the city or region, if you mark them) goes into the cloud visit record. Coordinates extracted from a photo's EXIF are stored in that photo's metadata — see 2.3.
+
+2.5. Statistics and leaderboard (only when signed in):
+— aggregated statistics: total and confirmed country count, days travelled, number of visits, score and level;
+— it is displayed in the shared leaderboard: score, level, confirmed country count and your profile name if you set one;
+— you can switch off your presence in the leaderboard in settings ("Show me in the leaderboard") — your stats are then hidden from the shared leaderboard;
+— the server calculates a percentile for you ("you have visited more countries than N% of users") based on the same statistics.
+
+2.6. Advertising module data. The App is free of charge and shows ads from the Yandex ad network (Yandex Mobile Ads): a banner on some screens and a full-screen ad on app launch — not on the first launch after installation and no more than once every 3 hours. The ad network processes:
+— a device advertising identifier (IDFA / Android Advertising ID);
+— device type, OS and app version, language;
+— ad interaction data: impressions and clicks;
+— approximate location derived from the IP address.
+
+The advertising module may use this data to select ads. This data is not passed to the App owner. Details on how Yandex processes data: Yandex Privacy Policy, https://yandex.ru/legal/confidential/.
+
+2.7. Maps. The world map is rendered from OpenStreetMap data: map tiles are loaded from the tile.openstreetmap.org servers. When tiles are loaded, the tile server sees your IP address and the requested map fragments. Your records and coordinates are not sent to OpenStreetMap servers.
+
+2.8. What the App does not ask you for: phone number, postal address, payment details, contacts from your address book, call or message history, or camera access. No account is required for basic use of the App.
+
+2.9. The error log and technical run data are generated and stored on your device only and are never transmitted.
+
+3. Where data is stored
+3.1. On your device: visits, marks, photo metadata and settings — in a local SQLite database in the App's protected area; the photos themselves — compressed copies in the App's file storage. The PIN hash and the biometrics setting — in the system secure storage (iOS Keychain / Android Keystore). You can delete the data at any time through the App or by uninstalling it.
+
+3.2. In the cloud (only when signed in): the data in 2.1–2.5 is stored by the Supabase provider (a PostgreSQL database and file storage) — separately for each account. Access to your database rows and files is closed by row-level security rules: other users of the App cannot see them, and the App owner does not browse them.
+
+3.3. The PIN code and biometrics are never sent to the cloud: only travel data syncs. Biometric data (Face ID / fingerprint) is processed solely by your device's operating system and never leaves it; the App only receives the verification result — success or failure.
+
+3.4. The App owner does not permanently store your data on any own server: the App's cloud storage is the Supabase database and file storage (see 3.2). The contents of your records also leave your device when you send a support e-mail — see section 4.
+
+4. Where data is transferred
+4.1. Supabase — the authentication, database and file-storage provider (only when signed in): the data in 2.1–2.5.
+
+4.2. The ad network (Yandex) is an independent controller with respect to the data in 2.6. The owner does not sell or pass your record or photo contents to it.
+
+4.3. The OpenStreetMap tile servers — requested map fragments and the IP address (see 2.7).
+
+4.4. Apple — when you sign in with your Apple ID (see 2.1).
+
+4.5. Support. The App has no built-in support form: you write yourself to appcreators.technolab@ya.ru or via https://appcreatores.win/support.html. What is processed: your message, the e-mail address for the reply and your name if you provide it. Device diagnostics, the App version and your records are not attached to the message automatically.
+
+4.6. The system "Share" dialog. Exported files (a PDF report, the year-recap video, a statistics card) are transferred only to the destination you choose in that dialog.
+
+4.7. The owner does not sell, rent or pass personal data to third parties for marketing purposes.
+
+5. Retention and withdrawal of consent
+5.1. Local data stays on your device for as long as you keep it; uninstalling the App erases it irreversibly.
+
+5.2. Cloud data (when signed in) is retained for as long as the account exists. Deleting a visit, mark or photo in the App while online deletes it from the cloud as well, including the photo files. To delete your account and all related data completely, write to appcreators.technolab@ya.ru — we will delete the account and the data from the database and file storage.
+
+5.3. A support request is kept in the owner's mailbox for no more than 12 months from the date of the request, then deleted.
+
+5.4. To withdraw consent to processing for advertising, change the privacy and advertising settings in your operating system or uninstall the App. On Apple devices the system additionally asks for tracking permission (ATT) — the standard operating system dialog; the prompt is shown before the ad module is initialised. Declining does not limit access to App features; ads are then shown in a less personalised form.
+
+5.5. Leaderboard participation can be switched off in the App's settings at any time; after that your stats stop appearing in the shared leaderboard.
+
+5.6. Withdrawal has no retroactive effect on processing already completed. Processing necessary to perform the contract and not requiring separate consent continues for the duration of the contract.
+
+6. Device permissions
+6.1. Geolocation (precise and approximate, only while using the App) — to detect the country you are in and mark a visit. Without the permission, marks are placed manually or from a photo.
+
+6.2. Photo library — to pick travel photos and attach them to visits (Android uses the system photo picker, iOS uses gallery access). The camera is not used by the App.
+
+6.3. Face ID / biometrics — for quick App unlock (together with the optional PIN code).
+
+6.4. The App requests only these permissions and only for the purposes listed. Declining a permission does not block other features, and any permission can be revoked in device settings at any time.
+
+7. Security
+7.1. Data is transmitted to the cloud and to providers over HTTPS; access to cloud data is closed by row-level database security rules. Local data can be protected with a PIN code and biometric unlock.
+
+7.2. No storage method is absolutely guarantee-free. We recommend enabling the App lock and your device's system lock.
+
+8. Children
+8.1. The App is not intended for independent use by persons under 14. Persons under 14 use the App with the consent of their legal representatives.
+
+8.2. An account and leaderboard participation are available only to users older than 14. The App does not request or process data about children.
+
+9. Your rights
+9.1. You have the right to:
+— know which data is processed and receive information on its composition and purposes;
+— withdraw consent for any of the processing operations — see section 5;
+— restrict or revoke permissions to access your device.
+
+9.2. You exercise most rights directly in the App: access, correction and deletion of records (locally and in the cloud), data export (PDF report, year-recap video, statistics card), and switching the leaderboard off. Complete account deletion is done by e-mail to appcreators.technolab@ya.ru (see 5.2).
+
+10. Changes to this Policy
+10.1. This Policy may be changed. The new revision is published at https://appcreatores.win/apps/travelme/privacy.html, with the revision date shown on that page. The App announces significant changes through an update.
+
+10.2. Continued use of the App after a new revision is published means you accept it.
+
+11. Contact
+App owner and operator: an individual, Alexander Khovrin (ALIAKSANDR KHOURYN).
+Contact for questions about personal data processing: appcreators.technolab@ya.ru</div>
+    </div>
+<p class="hint" style="margin-top:16px"><a href="terms.html"><span data-lang="ru">Условия использования →</span><span data-lang="en">Terms of Use →</span></a> · <a href="index.html"><span data-lang="ru">← Назад к приложению</span><span data-lang="en">← Back to the app</span></a></p>
+  </div></section>
+</main>
+<footer><div class="wrap">© 2026 AppCreatorsTechnoLab · <a href="../../index.html"><span data-lang="ru">Все приложения</span><span data-lang="en">All apps</span></a> · <a href="../../support.html?app=travelme"><span data-lang="ru">Поддержка</span><span data-lang="en">Support</span></a></div></footer>
+<script src="../../assets/js/i18n.js?v=20261026-7" defer></script><script src="../../assets/js/motion.js?v=20261026-7" defer></script>
+</body>
+</html>
