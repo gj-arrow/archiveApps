@@ -25,6 +25,12 @@ $SUPPORT_APPS = array(
     'garant' => array('Архив гарантий (Warranty Archive)', 'Warranty Archive'),
     'health-diary' => array('Дневник здоровья (Health Diary)', 'Health Diary'),
     'iskorka' => array('Копим с Искоркой (Sparky Savings)', 'Sparky Savings'),
+    'smenka' => array('Сменка (Smenka)', 'Smenka (Сменка)'),
+    'snore-detector' => array('Детектор храпа (Snore Detector)', 'Snore Detector (Детектор храпа)'),
+    'travelme' => array('TravelMe (трекер путешествий)', 'TravelMe (visited-countries tracker)'),
+    'iok' => array("IOK «Я в порядке»", "IOK (I'm OK)"),
+    'recall' => array('RecAll (память о звонках)', 'RecAll (call memory)'),
+    'miryadom' => array('Мы рядом (My Ryadom)', 'My Ryadom (Мы рядом)'),
     'other' => array('Общий вопрос', 'General question'),
 );
 

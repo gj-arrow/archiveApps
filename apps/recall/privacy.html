@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RecAll — Политика конфиденциальности · AppCreatorsTechnoLab</title>
+<meta name="description" content="Политика конфиденциальности RecAll — памяти о звонках от AppCreatorsTechnoLab. Аудио и расшифровка остаются на устройстве; на сервер уходит только текст расшифровки — и только по вашему нажатию. RU + EN.">
+<link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../assets/css/style.css?v=20261026-7">
+</head>
+<body data-app="recall" data-title-ru="RecAll — Политика конфиденциальности · AppCreatorsTechnoLab" data-title-en="RecAll — Privacy Policy · AppCreatorsTechnoLab">
+<header class="site"><div class="wrap nav">
+<a class="logo" href="../../index.html"><span class="logo-mark">AT</span><span>AppCreatorsTechnoLab<small><span data-lang="ru">сборник приложений</span><span data-lang="en">app collection</span></small></span></a>
+<nav class="nav-links"><a href="../../index.html"><span data-lang="ru">Приложения</span><span data-lang="en">Apps</span></a><a class="active" href="../../legal.html"><span data-lang="ru">Правовые документы</span><span data-lang="en">Legal</span></a><a href="../../support.html"><span data-lang="ru">Поддержка</span><span data-lang="en">Support</span></a></nav>
+</div></header>
+<main class="wrap">
+  <p class="breadcrumb"><a href="../../index.html"><span data-lang="ru">Главная</span><span data-lang="en">Home</span></a> / <a href="../../legal.html"><span data-lang="ru">Правовые документы</span><span data-lang="en">Legal documents</span></a> / <span data-lang="ru">RecAll · Политика конфиденциальности</span><span data-lang="en">RecAll · Privacy Policy</span></p>
+  <section class="section"><div class="legal">
+    <div data-lang="ru">
+    <h1>Политика конфиденциальности RecAll</h1>
+    <div class="meta"><span>AppCreatorsTechnoLab</span><span>·</span><span>RecAll</span></div>
+    <div class="doc">Политика конфиденциальности RecAll · AppCreatorsTechnoLab · RecAll · Редакция от 15 ноября 2026 г.
+
+1. Общие положения
+1.1. Настоящая Политика описывает, какие персональные данные обрабатывает мобильное приложение «RecAll» (далее — «Приложение»), зачем они нужны и кому передаются.
+
+1.2. Ключевой принцип — «лестница данных», показанная при первом запуске: аудио всегда остаётся на вашем телефоне и никуда не уходит; расшифровка (Whisper) выполняется тоже на телефоне; наружу — на сервер-прокси — отправляется только текст расшифровки и только когда вы сами нажимаете «AI-сводка» или задаёте вопрос к разговору. Не нажимаете — всё остаётся локально. Владелец Приложения не ведёт базу пользователей, не запрашивает регистрацию и не имеет доступа к вашим записям.
+
+1.3. Приложение начинает работу только после того, как на первом экране вы ознакомитесь с кратким описанием потоков данных, выберете срок хранения записей и нажмёте «Принять и включить». До этого действия Приложение не работает.
+
+1.4. Актуальная редакция Политики опубликована по адресу: https://appcreatores.win/apps/recall/privacy.html и всегда доступна на сайте каталога (Правовые документы → RecAll).
+
+1.5. Используя Приложение, вы подтверждаете, что ознакомились с настоящей Политикой. Если вы не согласны — не используйте Приложение.
+
+2. Какие данные обрабатывает Приложение
+2.1. Данные, которые вы вводите сами. Хранятся только на вашем устройстве:
+— записи разговоров и голосовые заметки: аудиофайл, название (например, имя контакта), дата, длительность, закреплённая отметка;
+— маркеры «важно», которые вы ставите во время записи, с таймкодами;
+— расшифровка: текст по репликам с таймкодами и статус обработки (в очереди / расшифровывается / готово / ошибка);
+— результаты ИИ-анализа — создаются только по вашему нажатию и сохраняются в карточке разговора: сводка (три пункта), тон разговора, обещания (кто, что и когда обещал), вопросы и темы;
+— история ваших вопросов к ИИ по разговору: тексты вопросов и ответов;
+— настройки Приложения: срок хранения записей, язык, тема, блокировка (PIN и биометрия), факт пройденного онбординга.
+
+2.2. Текст расшифровки при ИИ-анализе. Функции «AI-сводка», «обещания» и «вопросы к разговору» работают через сервер-прокси владельца (appcreatores.win). Если вы нажали «AI-сводка» или отправили вопрос, Приложение передаёт по защищённому соединению HTTPS:
+— только текст расшифровки выбранного разговора (аудио не передаётся никогда);
+— текст вашего вопроса и последние несколько ваших предыдущих вопросов с ответами — для диалога по разговору;
+— текущую дату — чтобы вычислить сроки обещаний;
+— служебные сведения: тип задачи и случайный идентификатор сессии, не содержащий данных о вас и ваших разговорах.
+
+Текст обрабатывается ИИ-моделями на стороне сервера-прокси: ключи и подбор моделей (цепочка локальной модели и сторонних ИИ-сервисов) находятся только на сервере, в самом Приложении их нет. Ответ (сводка, обещания и т. д.) возвращается в Приложение и сохраняется в карточке разговора. Обработка выполняется только на время запроса, на постоянной основе текст не хранится. Функции можно не использовать вовсе: расшифровка, поиск и плеер работают полностью локально.
+
+2.3. Скачивание модели расшифровки. Расшифровка выполняется на устройстве с помощью открытой модели Whisper (whisper.cpp). Файл модели (около 190 МБ) и небольшая модель фильтра тишины скачиваются с сайта huggingface.co только по вашему явному действию в настройках — трафик заметный, поэтому включено opt-in'ом по умолчанию. Скачивается только файл модели: никаких данных о вас в этом запросе нет. После установки модели расшифровка работает полностью офлайн.
+
+2.4. Обращение в поддержку. Обращения из раздела «Связаться с нами» отправляются через сервер Приложения (хостинг Vercel) на адрес appcreators.technolab@ya.ru по защищённому соединению HTTPS. Обрабатываются:
+— тема, текст обращения и прикреплённые вами файлы (до 5 файлов суммарным размером до 8 МБ) — поступают в электронную почту владельца;
+— версия Приложения, версия операционной системы, производитель и модель устройства — добавляются к обращению автоматически, чтобы ответить точнее; вы также можете не отправлять обращение вовсе;
+— ваш IP-адрес — используется исключительно для ограничения частоты запросов, не записывается в логи и удаляется из памяти сервера после обработки запроса.
+
+Записи разговоров, расшифровки и результаты ИИ-анализа при обращении в поддержку не передаются — только если вы сами прикрепите их как файлы.
+
+2.5. Чего Приложение не запрашивает: имя, адрес, телефон, почту, платёжные реквизиты, контакты из адресной книги, точное и приблизительное местоположение, историю посещений сайтов, банковские сведения. Аккаунт для работы Приложения не требуется; реклама и аналитика в Приложении отсутствуют.
+
+2.6. Журнал ошибок и технические сведения о работе Приложения формируются и хранятся только на устройстве, наружу не передаются. Технические сведения, автоматически добавляемые к обращению в поддержку, перечислены в п. 2.4.
+
+3. Где хранятся данные
+3.1. На устройстве: записи, расшифровки, результаты ИИ-анализа и настройки хранятся локально в защищённой области Приложения. База данных шифруется (SQLCipher); ключ шифрования генерируется на устройстве и хранится в системном защищённом хранилище (iOS Keychain / Android Keystore). Аудиофайлы хранятся в приватной папке Приложения, недоступной другим приложениям.
+
+3.2. PIN-код хранится в системном защищённом хранилище операционной системы (iOS Keychain / Android Keystore). Биометрия (отпечаток / лицо) обрабатывается исключительно операционной системой устройства и никогда его не покидает: Приложение получает от системы только результат проверки — «успешно» или «неуспешно».
+
+3.3. На серверах владельца постоянное хранение ваших данных не ведётся. Данные покидают устройство только в трёх случаях: при ИИ-анализе расшифровки по вашему нажатию (п. 2.2 — обрабатывается и удаляется из памяти сервера сразу после ответа), при обращении в поддержку (п. 2.4) и при скачивании файла модели (п. 2.3 — в этом запросе ваших данных нет).
+
+3.4. Экспорт обещания в календарь создаёт событие через стандартное окно календаря вашей операционной системы: Приложение не запрашивает доступ к вашим календарям и не читает их.
+
+4. Куда передаются данные
+4.1. ИИ-провайдеры — получают только текст расшифровки и сведения из п. 2.2, только на время обработки запроса. Владелец передаёт им только сам текст через свой сервер-прокси, без других ваших данных и без рекламных идентификаторов.
+
+4.2. Поддержка — сервер владельца (Vercel) и электронная почта владельца в объёме п. 2.4.
+
+4.3. Сайт huggingface.co — получает обычный запрос на скачивание публичного файла модели (п. 2.3) без данных о вас.
+
+4.4. Владелец не продаёт, не арендует и не передаёт персональные данные третьим лицам для маркетинговых целей.
+
+4.5. Кто имеет доступ к вашим записям: только вы. Аудио, расшифровки и содержимое разговоров не покидают устройство (кроме текста расшифровки, отправленного на ИИ-анализ по вашему нажатию, и файлов, которыми вы сами делитесь через системное меню «Поделиться»), и владелец Приложения их не видит. Владелец получает только то, что вы сами написали в обращении в поддержку. Доступ к данным имеют также ИИ-провайдеры — в объёме п. 2.2, и технические специалисты владельца — в объёме, необходимом для работы серверов поддержки и распознавания и устранения неисправностей.
+
+5. Сроки хранения и отзыв согласия
+5.1. Записи, расшифровки и настройки хранятся на вашем устройстве столько, сколько вы их храните. Выбранный при онбординге срок (30 или 90 дней) — это срок автоудаления: разговоры старше срока удаляются автоматически, закреплённые записи не удаляются. Вы можете удалить любую запись в Приложении в любой момент; удаление Приложения стирает все данные безвозвратно.
+
+5.2. Текст расшифровки, отправленный на ИИ-анализ, обрабатывается и удаляется из памяти сервера сразу после ответа; постоянное хранение не ведётся.
+
+5.3. Обращение в поддержку и приложенные к нему файлы хранятся в электронной почте владельца не более 12 месяцев с даты обращения, после чего удаляются.
+
+5.4. Согласие, данное при первом запуске, вы отзываете, удалив Приложение. Согласие на отправку текста расшифровки на сервер условно по нажатию: не нажимайте «AI-сводку» и не отправляйте вопросы — текст никуда не уйдёт; можно также удалить модель расшифровки в настройках. Отозвать согласие на отправку обращения в поддержку можно письмом на appcreators.technolab@ya.ru.
+
+5.5. Отзыв согласия не имеет обратной силы: он не распространяется на обработку, уже завершённую к моменту отзыва.
+
+6. Разрешения устройства
+6.1. Микрофон — для записи разговоров и голосовых заметок. Фоновая служба записи работает под постоянным уведомлением системы (foreground service типа microphone).
+
+6.2. Уведомления — чтобы показывать статус записи и фоновой расшифровки (сервис расшифровки работает под уведомлением типа «передача данных»). Рекламные и маркетинговые уведомления Приложение не отправляет.
+
+6.3. Состояние телефона — чтобы определять начало и завершение телефонного разговора для записи звонков.
+
+6.4. Биометрия — для разблокировки Приложения отпечатком или лицом (блокировка включается в настройках).
+
+6.5. Вибрация — тактильные подтверждения при записи (отметка маркера, тики таймера).
+
+6.6. Фоновые службы и запрет засыпания — служба записи (тип microphone) и служба расшифровки (тип передачи данных) работают, пока Приложение свёрнуто или экран заблокирован; wake lock не даёт процессору уснуть во время расшифровки. Эти возможности предоставляются системой и отдельно пользователем не запрашиваются.
+
+6.7. Интернет — используется только для трёх действий: скачивание модели расшифровки (п. 2.3), ИИ-анализ по вашему нажатию (п. 2.2) и обращение в поддержку (п. 2.4).
+
+6.8. Приложение запрашивает только эти разрешения и только для перечисленных целей. Отказ от разрешения не блокирует остальные функции; отозвать разрешение можно в настройках устройства в любой момент.
+
+7. Безопасность
+7.1. Для защиты данных доступны блокировка Приложения по PIN-коду и биометрии, шифрование базы данных (SQLCipher) с ключом в системном защищённом хранилище и приватное файловое хранилище аудиозаписей. Все передачи данных наружу (ИИ-анализ, поддержка, скачивание модели) выполняются по защищённому соединению HTTPS. Ключи ИИ-сервисов хранятся только на стороне сервера владельца.
+
+7.2. Ни один способ хранения не даёт абсолютной гарантии. Мы рекомендуем включить блокировку Приложения и системную блокировку устройства. Резервного копирования в Приложении нет — см. п. 5.1 об удалении.
+
+8. Дети
+8.1. Приложение не предназначено для самостоятельного использования лицами младше 14 лет. Лица младше 14 лет используют Приложение с согласия законных представителей.
+
+8.2. Записи разговоров могут содержать данные третьих лиц — собеседников. Вы вводите и записываете их самостоятельно и несёте ответственность за соблюдение законодательства о записи разговоров и персональных данных (см. также Условия использования). Данные хранятся на устройстве и не передаются владельцу; Приложение само не использует их для рекламы — рекламных модулей в Приложении нет.
+
+9. Ваши права
+9.1. Вы вправе:
+— знать, какие данные обрабатываются, и получить сведения о составе и целях обработки;
+— отозвать согласие на любую из обработок — см. раздел 5;
+— ограничить или отозвать разрешения на доступ к устройству.
+
+9.2. Права вы реализуете непосредственно в Приложении: просмотр, изменение и удаление записей, расшифровок и истории вопросов, очистка через автоудаление, удаление модели расшифровки, отключение блокировки. Удаление Приложения безвозвратно стирает все локальные данные.
+
+10. Изменения Политики
+10.1. Политика может быть изменена. Новая редакция публикуется по адресу https://appcreatores.win/apps/recall/privacy.html, дата редакции указана на этой странице. О существенных изменениях Приложение сообщает обновлением.
+
+10.2. Продолжение использования Приложения после публикации новой редакции означает согласие с ней.
+
+11. Контакты
+Владелец и оператор Приложения: физическое лицо Ховрин Александр (ALIAKSANDR KHOURYN).
+Контакты для обращений по вопросам обработки персональных данных: appcreators.technolab@ya.ru</div>
+    </div>
+    <div data-lang="en">
+    <h1>Privacy Policy</h1>
+    <div class="meta"><span>AppCreatorsTechnoLab</span><span>·</span><span>RecAll</span></div>
+<div class="doc">Privacy Policy of the "RecAll" app · AppCreatorsTechnoLab · RecAll · Last updated: November 15, 2026
+
+1. General provisions
+1.1. This Policy describes which personal data the "RecAll" mobile app (the "App") processes, why it needs it, and to whom it is transferred.
+
+1.2. The key principle is the "data ladder" shown at first launch: audio always stays on your phone and never leaves it; transcription (Whisper) also runs on the phone; the only thing sent to the proxy server is the transcript text — and only when you tap "AI summary" or ask a question about a conversation. If you never tap it, everything stays local. The App owner runs no user database, asks for no registration and has no access to your recordings.
+
+1.3. The App starts working only after you read the short description of data flows on the first screen, choose a retention period for recordings and press "Accept and enable". Until then the App does not work.
+
+1.4. The current revision is published at https://appcreatores.win/apps/recall/privacy.html and is always available on the catalog website (Legal documents → RecAll).
+
+1.5. By using the App you confirm that you have read this Policy. If you do not agree — do not use the App.
+
+2. What data the App processes
+2.1. Data you enter yourself, stored on your device only:
+— call recordings and voice memos: the audio file, a title (such as a contact name), date, duration, pinned flag;
+— "important" markers you place during a recording, with timestamps;
+— the transcript: text per utterance with timestamps and the processing status (queued / transcribing / ready / failed);
+— AI analysis results — created only when you tap and saved to the call card: a summary (three bullets), the tone of the conversation, promises (who promised what and when), questions and topics;
+— the history of your AI questions about a conversation: the texts of your questions and the answers;
+— App settings: the retention period for recordings, language, theme, lock (PIN and biometrics), and the fact that onboarding is complete.
+
+2.2. Transcript text during AI analysis. The "AI summary", "promises" and "questions about the conversation" features run through the owner's proxy server (appcreatores.win). When you tap "AI summary" or send a question, the App transmits over an encrypted HTTPS connection:
+— only the transcript text of the selected conversation (audio is never transmitted);
+— the text of your question and the last few of your previous questions with answers — for the conversation dialogue;
+— the current date — to calculate promise deadlines;
+— service information: the task type and a random session identifier that contains no data about you or your conversations.
+
+The text is processed by AI models on the proxy server side: the API keys and model selection (a chain of a local model and third-party AI services) live only on the server — there are no keys inside the App. The response (summary, promises, etc.) returns to the App and is saved to the call card. Processing happens only for the duration of the request; the text is not stored on a permanent basis. You can skip these features entirely: the transcript, search and player work fully locally.
+
+2.3. Downloading the transcription model. Transcription runs on your device with the open Whisper model (whisper.cpp). The model file (about 190 MB) and a small silence-filter model are downloaded from huggingface.co only by your explicit action in settings — the traffic is significant, so this is an opt-in, off by default. Only the model file is downloaded: no data about you travels in that request. Once the model is installed, transcription works fully offline.
+
+2.4. Support requests. Requests sent via "Contact us" are relayed by the App's server (Vercel hosting) to appcreators.technolab@ya.ru over HTTPS. Only the following is processed:
+— the subject, message text and any files you attach (up to 5 files, 8 MB total) — delivered to the owner's mailbox;
+— the app version, the OS version, the device manufacturer and model — added to the request automatically so we can answer more precisely; you may also simply not send a request;
+— your IP address — used solely to rate-limit requests, never written to logs and removed from server memory once the request is handled.
+
+Recordings, transcripts and AI analysis results are not sent with a support request — unless you attach them yourself as files.
+
+2.5. What the App does not ask you for: name, address, phone number, email, payment details, contacts from your address book, precise or approximate location, browsing history, banking details. No account is required; the App contains no ads and no analytics.
+
+2.6. The error log and technical run data are generated and stored on your device only and are never transmitted. Technical details added automatically to a support request are listed in 2.4.
+
+3. Where data is stored
+3.1. On your device: recordings, transcripts, AI analysis results and settings are stored locally in the App's protected area. The database is encrypted (SQLCipher); the encryption key is generated on the device and kept in the system secure storage (iOS Keychain / Android Keystore). Audio files are stored in the App's private folder, inaccessible to other apps.
+
+3.2. The PIN code is stored in the operating system's secure storage (iOS Keychain / Android Keystore). Biometrics (fingerprint / face) is processed solely by your device's operating system and never leaves it: the App only receives the verification result — success or failure.
+
+3.3. The App owner does not permanently store your data on any server. Data leaves your device in only three cases: AI analysis of a transcript on your tap (2.2 — processed and removed from server memory right after the response), a support request (2.4), and the model file download (2.3 — that request contains no data about you).
+
+3.4. Exporting a promise to the calendar creates an event through your operating system's standard calendar dialog: the App does not request calendar access and does not read your calendars.
+
+4. Where data is transferred
+4.1. AI providers — receive only the transcript text and the details in 2.2, only for the duration of the request. The owner passes them only the text itself, through the owner's proxy server, without any other data about you and without advertising identifiers.
+
+4.2. Support — the owner's server (Vercel) and the owner's mailbox, within 2.4.
+
+4.3. The huggingface.co website — receives an ordinary request to download a public model file (2.3) with no data about you.
+
+4.4. The owner does not sell, rent or pass personal data to third parties for marketing purposes.
+
+4.5. Who has access to your recordings: only you. Audio, transcripts and conversation contents never leave the device (except the transcript text you send for AI analysis by tapping, and files you share yourself through the system "Share" menu), and the App owner does not see them. The owner receives only what you write in a support request. Access to data also exists for AI providers — within 2.2, and the owner's technical staff — to the extent needed to run the support and recognition servers and fix faults.
+
+5. Retention and withdrawal of consent
+5.1. Recordings, transcripts and settings are kept on your device for as long as you keep them. The period chosen at onboarding (30 or 90 days) is the auto-deletion period: conversations older than that are deleted automatically, pinned records are not deleted. You can delete any record in the App at any time; uninstalling the App erases all data permanently.
+
+5.2. Transcript text sent for AI analysis is processed and removed from server memory right after the response; it is not stored on a permanent basis.
+
+5.3. A support request and its attachments are kept in the owner's mailbox for no more than 12 months from the date of the request, then deleted.
+
+5.4. You withdraw the consent given at first launch by uninstalling the App. Consent to sending transcript text to the server is tap-based: do not tap "AI summary" and do not send questions — the text will not go anywhere; you can also delete the transcription model in settings. To withdraw consent to sending a support request, write to appcreators.technolab@ya.ru.
+
+5.5. Withdrawal has no retroactive effect on processing already completed.
+
+6. Device permissions
+6.1. Microphone — to record conversations and voice memos. The background recording service runs under a persistent system notification (a foreground service of type microphone).
+
+6.2. Notifications — to show the status of recording and background transcription (the transcription service runs under a data-sync type notification). The App sends no advertising or marketing notifications.
+
+6.3. Phone state — to detect the start and end of a phone conversation for call recording.
+
+6.4. Biometrics — to unlock the App with a fingerprint or face (the lock is enabled in settings).
+
+6.5. Vibration — tactile confirmations during recording (marker stamps, timer ticks).
+
+6.6. Background services and keeping the device awake — the recording service (microphone type) and the transcription service (data sync type) keep working while the App is minimised or the screen is locked; a wake lock keeps the CPU awake during transcription. These capabilities are provided by the system and are not requested from the user separately.
+
+6.7. Internet — used only for three actions: downloading the transcription model (2.3), AI analysis on your tap (2.2), and a support request (2.4).
+
+6.8. The App requests only these permissions and only for the purposes listed. Declining a permission does not block other features, and any permission can be revoked in device settings at any time.
+
+7. Security
+7.1. Data protection features include App locking by PIN and biometrics, database encryption (SQLCipher) with the key in the system secure storage, and a private audio file store. All outgoing transfers (AI analysis, support, model download) run over an encrypted HTTPS connection. AI service keys are kept only on the owner's server side.
+
+7.2. No storage method is absolutely guaranteed. We recommend enabling the App lock and your device's system lock. There is no backup feature in the App — see 5.1 on deletion.
+
+8. Children
+8.1. The App is not intended for independent use by persons under 14. Persons under 14 use the App with the consent of their legal representatives.
+
+8.2. Call recordings may contain data about third parties — your conversation partners. You create and record them yourself and are responsible for complying with the laws on recording conversations and personal data (see also the Terms of Use). The data stays on the device and is not passed to the owner; the App does not use it for advertising — there are no advertising modules in the App.
+
+9. Your rights
+9.1. You have the right to:
+— know which data is processed and receive information on its composition and purposes;
+— withdraw consent for any of the processing purposes — see section 5;
+— restrict or revoke permissions to access your device.
+
+9.2. You exercise these rights directly in the App: viewing, editing and deleting records, transcripts and question history, cleanup via auto-deletion, deleting the transcription model, turning the lock off. Uninstalling the App permanently erases all local data.
+
+10. Changes to this Policy
+10.1. This Policy may be changed. The new revision is published at https://appcreatores.win/apps/recall/privacy.html, with the revision date shown on that page. The App announces significant changes through an update.
+
+10.2. Continued use of the App after a new revision is published means you accept it.
+
+11. Contact
+App owner and operator: an individual, Alexander Khovrin (ALIAKSANDR KHOURYN).
+Contact for questions about personal data processing: appcreators.technolab@ya.ru</div>
+    </div>
+<p class="hint" style="margin-top:16px"><a href="terms.html"><span data-lang="ru">Условия использования →</span><span data-lang="en">Terms of Use →</span></a> · <a href="index.html"><span data-lang="ru">← Назад к приложению</span><span data-lang="en">← Back to the app</span></a></p>
+  </div></section>
+</main>
+<footer><div class="wrap">© 2026 AppCreatorsTechnoLab · <a href="../../index.html"><span data-lang="ru">Все приложения</span><span data-lang="en">All apps</span></a> · <a href="../../support.html?app=recall"><span data-lang="ru">Поддержка</span><span data-lang="en">Support</span></a></div></footer>
+<script src="../../assets/js/i18n.js?v=20261026-7" defer></script><script src="../../assets/js/motion.js?v=20261026-7" defer></script>
+</body>
+</html>
