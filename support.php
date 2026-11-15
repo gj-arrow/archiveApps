@@ -29,7 +29,7 @@ $SUPPORT_APPS = array(
     'snore-detector' => array('Детектор храпа (Snore Detector)', 'Snore Detector (Детектор храпа)'),
     'travelme' => array('TravelMe (трекер путешествий)', 'TravelMe (visited-countries tracker)'),
     'iok' => array("IOK «Я в порядке»", "IOK (I'm OK)"),
-    'recall' => array('RecAll (память о звонках)', 'RecAll (call memory)'),
+    'recall' => array('AI RecAll (память о звонках)', 'AI RecAll (call memory)'),
     'miryadom' => array('Мы рядом (My Ryadom)', 'My Ryadom (Мы рядом)'),
     'other' => array('Общий вопрос', 'General question'),
 );
