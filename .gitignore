@@ -14,3 +14,11 @@ diag.php
 .playwright-mcp/
 docs/
 *.apk
+
+# Playwright / build / OS junk
+.playwright-cli/
+output/
+.zcode/
+Thumbs.db
+Desktop.ini
+*.tsbuildinfo
