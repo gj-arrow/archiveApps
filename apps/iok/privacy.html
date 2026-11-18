@@ -19,12 +19,12 @@
     <div data-lang="ru">
     <h1>Политика конфиденциальности IOK «Я в порядке»</h1>
     <div class="meta"><span>AppCreatorsTechnoLab</span><span>·</span><span>IOK (I'm OK)</span></div>
-    <div class="doc">Политика конфиденциальности приложения IOK «Я в порядке» · AppCreatorsTechnoLab · IOK · Редакция от 7 ноября 2026 г.
+    <div class="doc">Политика конфиденциальности приложения IOK «Я в порядке» · AppCreatorsTechnoLab · IOK · Редакция от 19 ноября 2026 г.
 
 1. Кто мы и к чему относится эта политика
 1.1. Эта политика описывает, какие данные обрабатывает мобильное приложение IOK «Я в порядке» (далее — «Приложение»), кто является оператором этих данных — физическое лицо Ховрин Александр (ALIAKSANDR KHOURYN) (далее — «Оператор», «мы»), — и какими правами обладает пользователь.
 
-1.2. Приложение помогает заботиться о близком человеке старшего возраста: близкий периодически нажимает кнопку «Я в порядке», а заботящийся пользователь получает уведомления — плановые подтверждения, тревогу, если нажатие пропущено в течение выбранного срока, и тревогу SOS, нажатую самим близким.
+1.2. Приложение помогает заботиться о близком человеке старшего возраста: близкий периодически нажимает кнопку «Я в порядке», а заботящийся пользователь получает уведомления — плановые подтверждения, тревогу, если нажатие пропущено в течение выбранного срока, и тревогу SOS, нажатую самим близким. Приложение не является средством экстренного вызова: кнопка SOS оповещает только участников семьи и не связывает с экстренными службами (см. Условия использования, раздел 3).
 
 1.3. Политика составлена в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных» и, насколько это применимо, с Общим регламентом по защите данных ЕС (GDPR). Устанавливая Приложение и начиная его использовать, пользователь подтверждает согласие с этой политикой. Если вы не согласны — не используйте Приложение.
 
@@ -36,19 +36,22 @@
 2.2. При установке и работе Приложения обрабатываются:
 — анонимный идентификатор учётной записи, создаваемый автоматически (без имени, телефона и электронной почты);
 — код семьи (приглашение), по которому устройства объединяются в одну семью, и сам факт связи «близкий — заботящийся пользователь»;
-— отображаемое имя близкого, которое заботящийся пользователь вводит сам для своего удобства (например, «Мама»);
-— время нажатий кнопки «Я в порядке» и производные статусы («всё хорошо», «скоро срок», «срок пропущен», «пауза»);
+— отображаемое имя близкого (например, «Мама»): его может ввести сам близкий при подключении к семье или заботящийся пользователь позднее; имя видно только участникам семьи и используется в уведомлениях;
+— время нажатий кнопки «Я в порядке» (в Приложении или на домашнем виджете) и производные статусы («всё хорошо», «скоро срок», «срок пропущен», «пауза»);
 — события тревоги: пропуск нажатия, тревога SOS и её отбой;
+— местоположение близкого в момент нажатия SOS: одна точка координат, если близкий разрешил доступ к геолокации; она передаётся заботящимся пользователям вместе с тревогой и видна в их Приложении; история перемещений не ведётся, координаты в иные моменты не запрашиваются, фонового сбора геолокации нет; координаты сохраняются в истории тревог семьи и могут быть открыты заботящимся пользователем во внешнем картографическом сервисе (раздел 5.5);
 — push-токены для доставки уведомлений (Firebase Cloud Messaging / Apple Push Notification service);
 — токен домашнего виджета, если пользователь добавляет виджет на главный экран;
 — настройки Приложения: тема оформления, язык интерфейса, срок подтверждения, пожелание получать (или не получать) уведомления о каждом подтверждении;
-— при отправке обращения через форму «Связаться с нами»: текст сообщения, выбранная тема и файлы, которые пользователь прикладывает сам (не более трёх, суммарно до 3 МБ); к обращению автоматически добавляются технические сведения — версия Приложения, версия операционной системы и модель устройства, — они нужны, чтобы воспроизвести и исправить проблему, и вводить их вручную не нужно.
+— IP-адрес при срабатывании защитных механизмов сервера: попытке входа по коду семьи, создании семьи и отправке обращения в поддержку, — для защиты от подбора кодов, спама и иных злоупотреблений; записи о неудачных попытках входа удаляются не позднее чем через два дня;
+— при отправке обращения через форму «Связаться с нами»: текст сообщения, выбранная тема и файлы, которые пользователь прикладывает сам (не более трёх, суммарно до 3 МБ); к обращению автоматически добавляются технические сведения — версия Приложения, версия операционной системы и модель устройства, — они нужны, чтобы воспроизвести и исправить проблему, и вводить их вручную не нужно. Форма не запрашивает адрес электронной почты и иные контакты; обращение и вложения отправляются письмом и не сохраняются в базе данных.
 
-2.3. Отдельные данные обрабатывает рекламный партнёр — см. раздел 6.
+2.3. Отдельные данные обрабатывают рекламный и аналитический партнёры — см. раздел 6.
 
 3. Какие данные мы НЕ собираем
-— геолокацию и данные о перемещениях;
-— контакты, фотографии, переписку;
+— историю перемещений: геолокация используется только как одна точка координат в момент нажатия SOS (раздел 2.2) и не запрашивается в фоновом режиме;
+— местоположение заботящегося пользователя: доступ к геолокации запрашивается только у близкого и только для передачи точки SOS;
+— контакты, переписку;
 — файлы — кроме тех, что пользователь сам прикладывает к обращению в поддержку (раздел 2.2);
 — номер телефона и адрес электронной почты;
 — биометрические и специальные категории персональных данных, включая медицинские данные. Приложение фиксирует только факт нажатия кнопки и события тревоги и не собирает сведения о здоровье.
@@ -56,42 +59,45 @@
 4. Цели обработки
 — объединение устройств семьи и работа кнопки «Я в порядке»;
 — доставка уведомлений: плановых подтверждений, напоминаний близкому, тревоги о пропущенном нажатии, тревоги SOS и её отбоя;
+— передача заботящимся пользователям местоположения в момент тревоги SOS (раздел 2.2);
 — работа домашних виджетов (кнопка близкого и статус у заботящегося пользователя);
 — ведение ленты событий и статистики внутри семьи;
 — техническая поддержка пользователей;
-— показ рекламы (только в части Приложения для заботящегося пользователя, см. раздел 6);
+— показ рекламы и обезличенная статистика её показов (только в части Приложения для заботящегося пользователя, см. раздел 6);
 — обеспечение безопасности и предотвращение злоупотреблений.
 
 5. С кем мы делимся данными (поставщики услуг)
 5.1. Supabase (Supabase Inc.) — хостинг серверной части и базы данных Приложения. В базе хранятся данные из раздела 2, доступ к ним из Приложения ограничен правами по роли участника семьи.
 
-5.2. Google LLC (Firebase Cloud Messaging) и Apple Inc. (Apple Push Notification service) — доставка push-уведомлений. Им передаются push-токен и содержание уведомления, необходимое для его показа.
+5.2. Google LLC (Firebase Cloud Messaging) и Apple Inc. (Apple Push Notification service) — доставка push-уведомлений. Им передаются push-токен и содержание уведомления — в том числе имена участников семьи и, при тревоге SOS, координаты из раздела 2.2, — необходимое для его показа.
 
-5.3. ООО «ЯНДЕКС» (рекламный SDK Яндекс Mobile Ads) — см. раздел 6.
+5.3. ООО «ЯНДЕКС» — рекламный модуль Yandex Mobile Ads и входящая в него аналитическая система AppMetrica — см. раздел 6.
 
-5.4. Vercel Inc. — инфраструктура, принимающая обращения из формы «Связаться с нами» и доставляющая их на электронную почту Оператора (письмо передаётся через почтовый сервис Яндекса). Ей передаются текст обращения, тема, вложения и технические сведения из раздела 2.2. Обращение отправляется только когда пользователь сам нажимает «Отправить».
+5.4. Vercel Inc. — инфраструктура, принимающая обращения из формы «Связаться с нами» и доставляющая их на электронную почту Оператора (письмо передаётся через почтовый сервис Яндекса). Ей передаются текст обращения, тема, вложения, технические сведения из раздела 2.2 и IP-адрес запроса — последний только для защиты от спама. Обращение отправляется только когда пользователь сам нажимает «Отправить».
 
-5.5. Мы не продаём персональные данные и не передаём их иным третьим лицам, кроме перечисленных поставщиков и случаев, предусмотренных законом.
+5.5. Картографические сервисы: координаты SOS передаются во внешнюю карту только когда заботящийся пользователь сам нажимает «Открыть карту», чтобы увидеть местоположение близкого: на устройствах с русским языком интерфейса — сервису Яндекс Карты (ООО «ЯНДЕКС»), на остальных — сервису Google Карты (Google LLC). В обоих случаях открывается обычная веб-страница с координатами.
+
+5.6. Мы не продаём персональные данные и не передаём их иным третьим лицам, кроме перечисленных поставщиков и случаев, предусмотренных законом.
 
 6. Реклама и согласие
 6.1. Приложение бесплатное и поддерживается рекламой. Реклама отображается только в части Приложения для заботящегося пользователя; часть Приложения, которой пользуется близкий человек, без рекламы.
 
-6.2. Используются форматы баннера и полноэкранного блока при запуске (не чаще каждого третьего запуска). Реклама подключена через SDK Яндекс (Yandex Mobile Ads). Этот SDK может обрабатывать идентификатор рекламной площадки, идентификатор устройства, настройки ОС (в том числе ограничения слежения), обобщённые данные о взаимодействии с рекламой и формировать рекламные предложения. Обработка осуществляется в соответствии с политикой конфиденциальности Яндекса: https://yandex.ru/legal/confidential/.
+6.2. Используются форматы баннера и полноэкранного блока при запуске (не в первые два запуска после установки и не чаще, чем раз в три часа). Реклама подключена через SDK Яндекс (Yandex Mobile Ads). Этот SDK может обрабатывать идентификатор рекламной площадки, идентификатор устройства, настройки ОС (в том числе ограничения слежения), обобщённые данные о взаимодействии с рекламой и формировать рекламные предложения. Кроме того, SDK автоматически инициализирует аналитическую систему AppMetrica (ООО «ЯНДЕКС»): она собирает обезличенные технические сведения — модель устройства, версию и язык операционной системы, IP-адрес, — а также события показов рекламы и рекламный идентификатор устройства (только при наличии разрешения на отслеживание) для отчётности, борьбы с рекламным мошенничеством и подбора рекламы. Обработка осуществляется в соответствии с политикой конфиденциальности Яндекса: https://yandex.ru/legal/confidential/.
 
-6.3. На устройствах Apple система дополнительно запрашивает разрешение на отслеживание (ATT) — стандартный диалог операционной системы, который показывается до инициализации рекламного модуля. Отказ на этом шаге не ограничивает доступ к функциям Приложения; реклама в этом случае показывается в менее персонализированном виде.
+6.3. На устройствах Apple система дополнительно запрашивает разрешение на отслеживание (ATT) — стандартный диалог операционной системы, который показывается до инициализации рекламного модуля. Рекламный идентификатор устройства (IDFA) используется только при согласии в этом диалоге. Отказ на этом шаге не ограничивает доступ к функциям Приложения; реклама в этом случае показывается в менее персонализированном виде.
 
 6.4. Пользователь может отозвать согласие на обработку данных в рекламных целях средствами операционной системы (ограничение слежения / запрет рекламных идентификаторов) — после этого реклама продолжает показываться, но перестаёт опираться на интересы.
 
 7. Хранение и удаление данных
-7.1. Данные хранятся, пока существует связь семьи и установлено Приложение. Настройки Приложения хранятся и на устройстве (настройки темы, языка, очередь неотправленных нажатий при отсутствии интернета).
+7.1. Данные хранятся, пока существует связь семьи и установлено Приложение. История нажатий и тревог хранится, пока участник состоит в семье; координаты SOS сохраняются в истории тревог (раздел 2.2). Настройки Приложения хранятся и на устройстве, как и очередь неотправленных нажатий и тревог SOS — включая координаты, если они были захвачены, — на случай отсутствия интернета.
 
 7.2. Пользователь может прекратить обработку в любой момент:
-— разорвать связь семьи (или выйти из неё) — данные семьи перестают быть доступны участникам;
-— удалить Приложение — анонимная учётная запись и связанные с ней данные удаляются в течение 30 дней, за исключением данных, которые мы обязаны хранить по закону.
+— разорвать связь семьи (или выйти из неё) — данные семьи перестают быть доступны участникам; заботящийся пользователь может удалить близкого из семьи — записи близкого и его события удаляются;
+— удалить Приложение — обработка данных на устройстве прекращается.
 
-7.3. Восстановление анонимной учётной записи вне устройства, на котором она была создана, невозможно.
+7.3. Данные на сервере связаны только с анонимной учётной записью и не содержат сведений, позволяющих установить личность. Запросить удаление серверных данных (анонимной учётной записи и связанных с ней записей семьи) можно на appcreators.technolab@ya.ru: сообщите код вашей семьи и (или) период использования — мы удалим данные в течение 30 дней с момента получения запроса, за исключением данных, которые мы обязаны хранить по закону. Запросы на доступ к данным или их уточнение направляются по тому же адресу.
 
-7.4. Запросы на доступ, уточнение или удаление данных можно направлять на appcreators.technolab@ya.ru.
+7.4. Восстановление анонимной учётной записи вне устройства, на котором она была создана, невозможно.
 
 8. Права пользователей
 В зависимости от применимого законодательства пользователь имеет право:
@@ -114,7 +120,7 @@
 Серверы поставщиков (раздел 5) могут находиться за пределами Российской Федерации. Пользователь, начиная использовать Приложение, соглашается с передачей данных таким поставщикам в объёме, необходимом для работы Приложения.
 
 12. Изменения политики
-Мы можем обновлять политику; актуальная редакция всегда доступна по адресу https://appcreatores.win/apps/iok/privacy.html. Существенные изменения доводятся до пользователей средствами Приложения. Продолжение использования Приложения после вступления изменений в силу означает согласие с новой редакцией.
+Мы можем обновлять политику; актуальная редакция всегда доступна по адресу https://appcreatores.win/apps/iok/privacy.html. Существенные изменения доводятся до пользователей средствами Приложения, а при существенном обновлении документов согласие запрашивается повторно при следующем запуске Приложения. Продолжение использования Приложения после вступления изменений в силу означает согласие с новой редакцией.
 
 13. Контакты оператора
 Оператор: физическое лицо Ховрин Александр (ALIAKSANDR KHOURYN).
@@ -123,12 +129,12 @@
     <div data-lang="en">
     <h1>Privacy Policy</h1>
     <div class="meta"><span>AppCreatorsTechnoLab</span><span>·</span><span>IOK (I'm OK)</span></div>
-<div class="doc">Privacy Policy of the IOK "I'm OK" app · AppCreatorsTechnoLab · IOK · Last updated: November 7, 2026
+<div class="doc">Privacy Policy of the IOK "I'm OK" app · AppCreatorsTechnoLab · IOK · Last updated: November 19, 2026
 
 1. Who we are and what this policy covers
 1.1. This policy describes what data the IOK "I'm OK" mobile app (the "App") processes, who the data operator is — an individual, Alexander Khovrin (ALIAKSANDR KHOURYN) (the "Operator", "we") — and what rights users have.
 
-1.2. The App helps families look after an older relative. The relative periodically presses the "I'm OK" button, and the caring user receives notifications: routine confirmations, an alert when a press is missed within the chosen period, and an SOS alert raised by the relative.
+1.2. The App helps families look after an older relative. The relative periodically presses the "I'm OK" button, and the caring user receives notifications: routine confirmations, an alert when a press is missed within the chosen period, and an SOS alert raised by the relative. The App is not an emergency-call tool: the SOS button only notifies family members and does not contact emergency services (see the Terms of Use, section 3).
 
 1.3. This policy is written in line with the Russian Federal Law No. 152-FZ "On Personal Data" and, where applicable, the EU General Data Protection Regulation (GDPR). By installing and using the App the user accepts this policy. If you do not agree — do not use the App.
 
@@ -140,19 +146,22 @@
 2.2. When you install and use the App, the following data is processed:
 — an anonymous account identifier created automatically (no name, phone or email attached);
 — the family invite code that links devices into one family, and the fact of the "relative — caring user" link;
-— the display name of the relative, typed by the caring user for their own convenience (for example, "Mom");
-— the times of "I'm OK" button presses and derived statuses ("all good", "due soon", "deadline missed", "paused");
+— the display name of the relative (for example, "Mom"): it may be typed by the relative when joining the family or by the caring user later; the name is visible only to family members and is used in notifications;
+— the times of "I'm OK" button presses (in the App or via the home-screen widget) and derived statuses ("all good", "due soon", "deadline missed", "paused");
 — alert events: a missed press, an SOS alert and its cancellation;
+— the relative's location at the moment of an SOS press: a single point of coordinates, captured only if the relative granted location access; it is shared with the caring family members together with the alert and is visible in their App; no movement history is kept, coordinates are not requested at any other time, and there is no background location collection; the coordinates are kept in the family's alert history and can be opened by the caring user on an external map service (section 5.5);
 — push tokens used to deliver notifications (Firebase Cloud Messaging / Apple Push Notification service);
 — the home-screen widget token, if the user adds the widget;
 — App settings: theme, interface language, the confirmation deadline, and the choice to receive (or not receive) a notification for every press;
-— support requests sent via the "Contact us" form: the message text, the selected topic and files the user attaches themselves (up to three, 3 MB total); every request automatically carries technical details — the app version, the OS version and the device model — needed to reproduce and fix the problem; the user does not enter them manually.
+— the IP address when the server's protective mechanisms fire: a family-code sign-in attempt, family creation or a support request — used to protect against code guessing, spam and other abuse; records of unsuccessful sign-in attempts are deleted no later than two days after they are made;
+— support requests sent via the "Contact us" form: the message text, the selected topic and files the user attaches themselves (up to three, 3 MB total); every request automatically carries technical details — the app version, the OS version and the device model — needed to reproduce and fix the problem; the user does not enter them manually. The form does not ask for an email address or any other contact details; the request and its attachments are sent as an email and are not stored in any database.
 
-2.3. Additional data is processed by our advertising partner — see section 6.
+2.3. Additional data is processed by our advertising and analytics partners — see section 6.
 
 3. What we do NOT collect
-— location or movement history;
-— contacts, photos, messages;
+— movement history: location is used only as a single point of coordinates at the moment of an SOS press (section 2.2) and is never collected in the background;
+— the caring user's location: location access is requested only from the relative and only for an SOS;
+— contacts, messages;
 — files, except those the user attaches to a support request themselves (section 2.2);
 — phone numbers or email addresses;
 — biometric or special categories of personal data, including health data. The App only records the fact of a button press and alert events; it does not collect any health information.
@@ -160,42 +169,45 @@
 4. Why we process this data (purposes)
 — linking family devices and operating the "I'm OK" button;
 — delivering notifications: routine confirmations, reminders to the relative, missed-press alerts, SOS alerts and their cancellation;
+— sharing the relative's location at the moment of an SOS alert with the caring users (section 2.2);
 — operating the home-screen widgets (the relative's button and the caring user's status);
 — maintaining the family event feed and statistics;
 — providing user support;
-— showing advertising (only in the caring-user part of the App, see section 6);
+— showing advertising and collecting depersonalized statistics of ad impressions (only in the caring-user part of the App, see section 6);
 — security and abuse prevention.
 
 5. Who we share data with (service providers)
 5.1. Supabase (Supabase Inc.) — hosting of the App's backend and database. The data listed in section 2 is stored there; app access is restricted by family-member roles.
 
-5.2. Google LLC (Firebase Cloud Messaging) and Apple Inc. (Apple Push Notification service) — push notification delivery. They receive the push token and the notification content needed to display it.
+5.2. Google LLC (Firebase Cloud Messaging) and Apple Inc. (Apple Push Notification service) — push notification delivery. They receive the push token and the notification content — including family members' names and, for an SOS alert, the coordinates from section 2.2 — needed to display it.
 
-5.3. Yandex LLC (Yandex Mobile Ads SDK) — see section 6.
+5.3. Yandex LLC — the Yandex Mobile Ads advertising module and the AppMetrica analytics system it includes — see section 6.
 
-5.4. Vercel Inc. — the infrastructure that receives support requests from the "Contact us" form and delivers them to the Operator's email (the email is sent via Yandex's mail service). It receives the message text, the topic, the attachments and the technical details from section 2.2. A request is sent only when the user presses "Send" themselves.
+5.4. Vercel Inc. — the infrastructure that receives support requests from the "Contact us" form and delivers them to the Operator's email (the email is sent via Yandex's mail service). It receives the message text, the topic, the attachments, the technical details from section 2.2 and the request's IP address — the latter only for spam protection. A request is sent only when the user presses "Send" themselves.
 
-5.5. We do not sell personal data and do not pass it to any third parties other than the providers listed above and cases required by law.
+5.5. Map services: SOS coordinates are passed to an external map only when the caring user presses "Open map" themselves, to see the relative's location: on devices with a Russian interface language — to Yandex Maps (Yandex LLC), otherwise — to Google Maps (Google LLC). In both cases an ordinary web page with the coordinates is opened.
+
+5.6. We do not sell personal data and do not pass it to any third parties other than the providers listed above and cases required by law.
 
 6. Advertising and consent
 6.1. The App is free and supported by advertising. Ads are shown only in the caring-user part of the App; the part used by the relative is ad-free.
 
-6.2. Formats used are a banner and a full-screen block on launch (no more than every third launch). Ads are served via the Yandex Mobile Ads SDK. The SDK may process the ad unit identifier, device identifiers, OS settings (including tracking limitations), aggregated data on interaction with ads, and build ad interest profiles. This processing follows the Yandex privacy policy: https://yandex.com/legal/confidential/.
+6.2. Formats used are a banner and a full-screen block on launch (not in the first two launches after installation and no more often than once every three hours). Ads are served via the Yandex Mobile Ads SDK. The SDK may process the ad unit identifier, device identifiers, OS settings (including tracking limitations), aggregated data on interaction with ads, and build ad interest profiles. In addition, the SDK automatically initializes the AppMetrica analytics system (Yandex LLC): it collects depersonalized technical details — the device model, the OS version and language, the IP address — as well as ad impression events and the device's advertising identifier (only if tracking permission has been granted), for reporting, ad-fraud prevention and ad selection. This processing follows the Yandex privacy policy: https://yandex.com/legal/confidential/.
 
-6.3. On Apple devices the system additionally asks for tracking permission (ATT) — the standard operating system dialog shown before the advertising module is initialised. Declining does not limit access to App features; ads are then shown in a less personalised form.
+6.3. On Apple devices the system additionally asks for tracking permission (ATT) — the standard operating system dialog shown before the advertising module is initialised. The device advertising identifier (IDFA) is used only if the user agrees in this dialog. Declining does not limit access to App features; ads are then shown in a less personalised form.
 
 6.4. The user can withdraw consent to data processing for advertising purposes using operating-system tools (limit ad tracking / disable the advertising identifier). Ads will still be shown, but no longer personalised.
 
 7. Data retention and deletion
-7.1. Data is retained for as long as the family link exists and the App is installed. App settings are also stored on the device (theme, language, and the queue of presses waiting to be sent when the internet is unavailable).
+7.1. Data is retained for as long as the family link exists and the App is installed. Press and alert history is kept while the member belongs to the family; SOS coordinates are kept in the alert history (section 2.2). App settings are also stored on the device, as is the queue of presses and SOS alerts — including the coordinates, if they were captured — waiting to be sent when the internet is unavailable.
 
 7.2. The user can stop processing at any time:
-— break the family link (or leave the family) — family data stops being available to members;
-— uninstall the App — the anonymous account and its related data are deleted within 30 days, except data we are legally required to keep.
+— break the family link (or leave the family) — family data stops being available to members; the caring user can remove the relative from the family — the relative's records and events are deleted;
+— uninstall the App — processing on the device stops.
 
-7.3. The anonymous account cannot be restored outside the device it was created on.
+7.3. Server-side data is tied only to an anonymous account and contains no information that could identify a person. To request deletion of server-side data (the anonymous account and the family records linked to it), email appcreators.technolab@ya.ru: include your family code and/or the period of use — we will delete the data within 30 days of receiving the request, except for data we are legally required to keep. Requests for access to data or its correction go to the same address.
 
-7.4. Requests for access, correction or deletion can be sent to appcreators.technolab@ya.ru.
+7.4. The anonymous account cannot be restored outside the device it was created on.
 
 8. User rights
 Depending on applicable law, the user has the right to:
@@ -218,7 +230,7 @@ The App is not intended for persons under 18 and does not knowingly collect data
 The providers' servers (section 5) may be located outside the Russian Federation. By using the App the user agrees to the transfer of data to these providers to the extent necessary for the App to work.
 
 12. Changes to this policy
-We may update this policy; the current version is always available at https://appcreatores.win/apps/iok/privacy.html. Material changes are communicated to users through the App. Continued use of the App after the changes take effect means the user accepts the updated policy.
+We may update this policy; the current version is always available at https://appcreatores.win/apps/iok/privacy.html. Material changes are communicated to users through the App; when the documents are materially updated, consent is requested again at the next launch of the App. Continued use of the App after the changes take effect means the user accepts the updated policy.
 
 13. Operator contacts
 Operator: an individual, Alexander Khovrin (ALIAKSANDR KHOURYN).
